@@ -1,0 +1,27 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@1.2
+
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/python:3.8
+    steps:
+      - checkout
+      - run:
+          name: poetry setup
+          command: |
+            pip install -U pip setuptools
+            pip install poetry pre-commit
+            poetry install
+      - run:
+          name: Run tests
+          # This assumes pytest is installed via the install-package step above
+          command: poetry run pytest
+
+workflows:
+  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run.
+    jobs:
+      - build-and-test

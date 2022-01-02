@@ -1,0 +1,17 @@
+add this to the END of pre-commit-config.yaml for cruft check once cookiecutter is done and up on git
+
+
+      - id: circleci-config
+        name: Pack CircleCI config
+        entry: .githooks/pre-commit-scripts/circleci.sh
+        language: script
+        files: '^\.circleci/'
+
+
+      - id: cruft-check
+        name: Check project cruft (cruft)
+        entry: .githooks/pre-commit-scripts/cruft-check.sh
+        language: python
+        additional_dependencies: [cruft==2.9.0]
+        always_run: true
+        stages: [push]
