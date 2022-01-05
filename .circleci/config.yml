@@ -110,7 +110,6 @@ jobs:
         executor: default
         steps:
             - checkout
-            - get-pr-branch
             - circleci-cli/install
             - poetry-configure
             - run:

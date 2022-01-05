@@ -5,7 +5,7 @@ steps:
 #      fingerprints:
 #        -
   - checkout
-  - get-pr-branch
+#  - get-pr-branch
 #  - aws-cli/install
   - circleci-cli/install
 #  - restore-test-cache
