@@ -27,6 +27,7 @@ steps:
 
         PR_RESPONSE=$(curl -H "Authorization: token $GITHUB_TOKEN" "$PR_REQUEST_URL")
 
+        echo "got PR response succesfully"
 
         PR_TITLE=$(echo $PR_RESPONSE | jq -e '.title' | tr -d '"')
 

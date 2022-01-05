@@ -27,7 +27,7 @@ commands:
                     API_GITHUB="https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCE_PROJECT_REPONAME"
                     PR_REQUEST_URL="$API_GITHUB/pulls/$PR_NUMBER"
                     PR_RESPONSE=$(curl -H "Authorization: token $GITHUB_TOKEN" "$PR_REQUEST_URL")
-
+                    echo "got PR response succesfully"
                     PR_TITLE=$(echo $PR_RESPONSE | jq -e '.title' | tr -d '"')
                     echo "PR_TITLE: $PR_TITLE"
                     echo "export GITHUB_PR_TITLE='${PR_TITLE/"'"/}'" >> $BASH_ENV
