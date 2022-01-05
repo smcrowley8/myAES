@@ -7,11 +7,11 @@ Table of contents:
 - [Developement](#Developement)
 
 # Installation
-requires python 3.8 or above
-
+requires python 3.8.12
 ```bash
 pip install poetry
-poetry add <PROJECT-NAME>
+poetry install
+myAES --help
 ```
 
 # Guide
@@ -19,11 +19,11 @@ poetry add <PROJECT-NAME>
 <!-- Subsection explaining how to use package -->
 
 # Developement
-To develop, install dependencies and enable pre-commit hooks
+To develop, install dependencies and enable pre-commit hooks.
 
 Requirements:
     - pyenv
-    - python3.9.7 +
+    - python3.8.12
 
 
 
