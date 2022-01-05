@@ -1,4 +1,4 @@
-from backend import __version__
+from myAES import __version__
 
 # from tests import <TEST_MODULE>
 
