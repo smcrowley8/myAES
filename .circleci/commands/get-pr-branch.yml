@@ -1,0 +1,49 @@
+description: |
+  Gets and sets following env vars
+    * $GITHUB_PR_BASE_BRANCH
+    * $GITHUB_PR_NUMBER
+    * $GITHUB_PR_TITLE
+    * $GITHUB_PR_AUTHOR_USERNAME
+  require $GITHUB_TOKEN be set as an env var
+steps:
+  - run:
+      name: Get branch variables
+      command: >
+        if ! (command -v jq >/dev/null 2>&1); then
+          echo "install jq to continue"
+          exit 1
+        fi
+
+        PR_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | sed "s/.*\/pull\///")
+
+        echo "PR_NUMBER: $PR_NUMBER"
+
+        echo "export GITHUB_PR_NUMBER=$PR_NUMBER" >> $BASH_ENV
+
+
+        API_GITHUB="https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCE_PROJECT_REPONAME"
+
+        PR_REQUEST_URL="$API_GITHUB/pulls/$PR_NUMBER"
+
+        PR_RESPONSE=$(curl -H "Authorization: token $GITHUB_TOKEN" "$PR_REQUEST_URL")
+
+
+        PR_TITLE=$(echo $PR_RESPONSE | jq -e '.title' | tr -d '"')
+
+        echo "PR_TITLE: $PR_TITLE"
+
+        echo "export GITHUB_PR_TITLE='${PR_TITLE/"'"/}'" >> $BASH_ENV
+
+
+        PR_BASE_BRANCH=$(echo $PR_RESPONSE | jq -e '.base.ref' | tr -d '"')
+
+        echo "PR_BASE_BRANCH: $PR_BASE_BRANCH"
+
+        echo "export GITHUB_PR_BASE_BRANCH='${PR_BASE_BRANCH/"'"/}'" >> $BASH_ENV
+
+
+        PR_AUTHOR_USERNAME=$(echo $PR_RESPONSE | jq -e '.user.login' | tr -d '"'))
+
+        echo "PR_AUTHOR_USERNAME: $PR_AUTHOR_USERNAME"
+
+        echo "GITHUB_PR_AUTHOR_USERNAME='${PR_AUTHOR_USERNAME/"'"/}'" >> $BASH_ENV

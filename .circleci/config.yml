@@ -1,27 +1,144 @@
-version: 2.1
+commands:
+    bump-branch-version:
+        description: Bump package version via git
+        steps:
+            - run:
+                command: .circleci/scripts/bump-version.sh "$GITHUB_PR_BASE_BRANCH" "$CIRCLE_BRANCH"
+                name: Bump package version
+    get-pr-branch:
+        description: |
+            Gets and sets following env vars
+              * $GITHUB_PR_BASE_BRANCH
+              * $GITHUB_PR_NUMBER
+              * $GITHUB_PR_TITLE
+              * $GITHUB_PR_AUTHOR_USERNAME
+            require $GITHUB_TOKEN be set as an env var
+        steps:
+            - run:
+                command: |
+                    if ! (command -v jq >/dev/null 2>&1); then
+                      echo "install jq to continue"
+                      exit 1
+                    fi
+                    PR_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | sed "s/.*\/pull\///")
+                    echo "PR_NUMBER: $PR_NUMBER"
+                    echo "export GITHUB_PR_NUMBER=$PR_NUMBER" >> $BASH_ENV
 
-orbs:
-  python: circleci/python@1.2
+                    API_GITHUB="https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCE_PROJECT_REPONAME"
+                    PR_REQUEST_URL="$API_GITHUB/pulls/$PR_NUMBER"
+                    PR_RESPONSE=$(curl -H "Authorization: token $GITHUB_TOKEN" "$PR_REQUEST_URL")
 
+                    PR_TITLE=$(echo $PR_RESPONSE | jq -e '.title' | tr -d '"')
+                    echo "PR_TITLE: $PR_TITLE"
+                    echo "export GITHUB_PR_TITLE='${PR_TITLE/"'"/}'" >> $BASH_ENV
+
+                    PR_BASE_BRANCH=$(echo $PR_RESPONSE | jq -e '.base.ref' | tr -d '"')
+                    echo "PR_BASE_BRANCH: $PR_BASE_BRANCH"
+                    echo "export GITHUB_PR_BASE_BRANCH='${PR_BASE_BRANCH/"'"/}'" >> $BASH_ENV
+
+                    PR_AUTHOR_USERNAME=$(echo $PR_RESPONSE | jq -e '.user.login' | tr -d '"'))
+                    echo "PR_AUTHOR_USERNAME: $PR_AUTHOR_USERNAME"
+                    echo "GITHUB_PR_AUTHOR_USERNAME='${PR_AUTHOR_USERNAME/"'"/}'" >> $BASH_ENV
+                name: Get branch variables
+    poetry-configure:
+        description: Configure poetry
+        steps:
+            - run:
+                command: |
+                    pip install -U pip setuptools
+                    pip install poetry
+                name: Configure poetry
+    restore-test-cache:
+        description: Restores the build-test cache for pyenv, poetry, and pre-commit
+        steps:
+            - restore_cache:
+                key: v1-pyenv-{{ arch }}-backend-{{ checksum "poetry.lock" }}
+            - restore_cache:
+                key: v1-poetry-{{ arch }}-backend-{{ checksum "poetry.lock" }}
+            - restore_cache:
+                key: v1-precommit-{{ arch }}-backend-{{ checksum "poetry.lock" }}
+    save-test-cache:
+        description: Store the build-test cache for pyenv, poetry, and pre-commit
+        steps:
+            - save_cach:
+                key: v1-pyenv-{{ arch }}-backend-{{ checksum "poetry.lock" }}
+                paths:
+                    - ~/.pyenv
+            - save_cach:
+                key: v1-poetry-{{ arch }}-backend-{{ checksum "poetry.lock" }}
+                paths:
+                    - ~/.cache/pypoetry
+            - save_cach:
+                key: v1-precommit-{{ arch }}-backend-{{ checksum "poetry.lock" }}
+                paths:
+                    - ~/.cache/pre-commit
+    store-test-artifacts:
+        description: Store test artifacts in CCI workflow run
+        parameters:
+            artifacts_path:
+                description: The absolute path to artifacts store as an env var
+                type: string
+            artifacts_storage_dir:
+                default: << parameters.artifacts_path >>
+                description: The direction in /tmp where artifacts are stored
+                type: string
+            export_test_results:
+                default: false
+                description: Whether or not to upload artifacts as Test Summary metadata
+                type: boolean
+        steps:
+            - store_artifacts:
+                destination: << parameters.artifacts_storage_dir >>
+                path: << parameters.artifacts_path >>
+            - when:
+                condition: << parameters.export_test_results >>
+                steps:
+                    - store_test_results:
+                        path: << parameters.artifacts_path >>
+executors:
+    default:
+        docker:
+            - image: cimg/python:3.8
+        resource_class: small
+    python-medium:
+        docker:
+            - image: cimg/python:3.8
+        resource_class: small
 jobs:
-  build-and-test:
-    docker:
-      - image: cimg/python:3.8
-    steps:
-      - checkout
-      - run:
-          name: poetry setup
-          command: |
-            pip install -U pip setuptools
-            pip install poetry pre-commit
-            poetry install
-      - run:
-          name: Run tests
-          # This assumes pytest is installed via the install-package step above
-          command: poetry run pytest
-
+    build-test:
+        description: Test building with poetry, cruft, pre-commit, and run unit tests with pytest
+        executor: default
+        steps:
+            - checkout
+            - get-pr-branch
+            - circleci-cli/install
+            - poetry-configure
+            - run:
+                command: poetry install
+                name: Install Dependencies
+            - run:
+                command: |
+                    poetry run pre-commit install
+                    poetry run pre-commit run
+                name: Run commit hooks
+            - run:
+                command: |
+                    mkdir -p test-results/unit
+                    poetry run pytest --junit-xml test-results/unit/results.xml
+                name: Run tests
+orbs:
+    aws-cli: circleci/aws-cli@2.0.3
+    circleci-cli: circleci/circleci-cli@0.1.9
+    github-cli: circleci/github-cli@1.0.3
+    python: circleci/python@1.2
+scripts: {}
+version: 2.1
 workflows:
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
-    jobs:
-      - build-and-test
+    pull-request-tests:
+        jobs:
+            - build-test:
+                filters:
+                    branches:
+                        ignore:
+                            - main
+

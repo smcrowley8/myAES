@@ -1,0 +1,6 @@
+jobs:
+  - build-test:
+      filters:
+        branches:
+          ignore:
+            - main

@@ -71,3 +71,9 @@ repos:
           - flake8==3.9.2
           - "flake8-import-order>=0.18,<0.19"
           - flake8-print>=3.1.4,<4
+
+      - id: circleci-config
+        name: Pack CircleCI config
+        entry: .githooks/pre-commit-scripts/circleci.sh
+        language: script
+        files: '^\.circleci/'

@@ -1,0 +1,8 @@
+description: Restores the build-test cache for pyenv, poetry, and pre-commit
+steps:
+  - restore_cache:
+      key: v1-pyenv-{{ arch }}-backend-{{ checksum "poetry.lock" }}
+  - restore_cache:
+      key: v1-poetry-{{ arch }}-backend-{{ checksum "poetry.lock" }}
+  - restore_cache:
+      key: v1-precommit-{{ arch }}-backend-{{ checksum "poetry.lock" }}

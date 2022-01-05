@@ -1,0 +1,38 @@
+description: Test building with poetry, cruft, pre-commit, and run unit tests with pytest
+executor: default #make python-medium for larger container
+steps:
+#  - add_ssh_keys:
+#      fingerprints:
+#        -
+  - checkout
+  - get-pr-branch
+#  - aws-cli/install
+  - circleci-cli/install
+#  - restore-test-cache
+  - poetry-configure
+#  - bump-branch-version
+  - run:
+      name: Install Dependencies
+      command: poetry install
+#  - run:
+#      name: Build artifact with poetry
+#      command: poetry build
+#  - run:
+#      name: Cruft check
+#      command: poetry run cruft check
+  - run:
+      name: Run commit hooks
+      command: |
+        poetry run pre-commit install
+        poetry run pre-commit run
+#        \
+#          --source "origin/${GITHUB_PR_BASE_BRANCH}" \
+#          --origin "origin/${CIRCLE_BRANCH}" \
+#          --show-diff-on-failure
+  - run:
+      name: Run tests
+      command: |
+        mkdir -p test-results/unit
+        poetry run pytest --junit-xml test-results/unit/results.xml
+  #- store-test-artifacts: #artifacts_path: test-results #export_test_resutls: true
+#  - save-test-cache
