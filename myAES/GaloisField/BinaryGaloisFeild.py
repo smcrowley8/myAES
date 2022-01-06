@@ -1,5 +1,4 @@
-# made by Sean Crowley
-from typing import Tuple
+from typing import Optional, Tuple
 
 from pydantic import BaseModel
 from rich.console import Console
@@ -10,6 +9,7 @@ class GF2(BaseModel):
 
     console: Console = Console()
     value: int
+    degree: Optional[int]
 
     # add verifiers for setting binary field based on init value
     # add verifyer for setting gf degree on init

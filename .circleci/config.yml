@@ -52,24 +52,24 @@ commands:
         description: Restores the build-test cache for pyenv, poetry, and pre-commit
         steps:
             - restore_cache:
-                key: v1-pyenv-{{ arch }}-backend-{{ checksum "poetry.lock" }}
+                key: v1-pyenv-{{ arch }}-myAES-{{ checksum "poetry.lock" }}
             - restore_cache:
-                key: v1-poetry-{{ arch }}-backend-{{ checksum "poetry.lock" }}
+                key: v1-poetry-{{ arch }}-myAES-{{ checksum "poetry.lock" }}
             - restore_cache:
-                key: v1-precommit-{{ arch }}-backend-{{ checksum "poetry.lock" }}
+                key: v1-precommit-{{ arch }}-myAES-{{ checksum "poetry.lock" }}
     save-test-cache:
         description: Store the build-test cache for pyenv, poetry, and pre-commit
         steps:
             - save_cach:
-                key: v1-pyenv-{{ arch }}-backend-{{ checksum "poetry.lock" }}
+                key: v1-pyenv-{{ arch }}-myAES-{{ checksum "poetry.lock" }}
                 paths:
                     - ~/.pyenv
             - save_cach:
-                key: v1-poetry-{{ arch }}-backend-{{ checksum "poetry.lock" }}
+                key: v1-poetry-{{ arch }}-myAES-{{ checksum "poetry.lock" }}
                 paths:
                     - ~/.cache/pypoetry
             - save_cach:
-                key: v1-precommit-{{ arch }}-backend-{{ checksum "poetry.lock" }}
+                key: v1-precommit-{{ arch }}-myAES-{{ checksum "poetry.lock" }}
                 paths:
                     - ~/.cache/pre-commit
     store-test-artifacts:
@@ -112,6 +112,7 @@ jobs:
             - checkout
             - circleci-cli/install
             - poetry-configure
+            - bump-branch-version
             - run:
                 command: poetry install
                 name: Install Dependencies
@@ -125,6 +126,30 @@ jobs:
                     mkdir -p test-results/unit
                     poetry run pytest --junit-xml test-results/unit/results.xml
                 name: Run tests
+            - save-test-cache
+    package-test:
+        description: null
+        executor: null
+        steps:
+            - checkout
+            - circleci-cli/install
+            - restore-test-cache
+            - poetry-configure
+            - run:
+                command: poetry install
+                name: Install Dependencies
+            - run:
+                command: |
+                    poetry run myAES test-command --repeat "test phrase"
+
+                    if [[ $(!!) != "test phrase" ]]; then
+
+                      echo "test command failed to echo given phrase"
+
+                      exit 1
+
+                    fi
+                name: Test CLI command
 orbs:
     aws-cli: circleci/aws-cli@2.0.3
     circleci-cli: circleci/circleci-cli@0.1.9
