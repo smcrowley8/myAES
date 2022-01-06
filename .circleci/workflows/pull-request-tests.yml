@@ -5,4 +5,9 @@ jobs:
           ignore:
             - main
   - package-test:
-      requires: build-test
+      filters:
+        branches:
+          ignore:
+            - main
+      requires:
+        - build-test
