@@ -1,14 +1,14 @@
 description: Store the build-test cache for pyenv, poetry, and pre-commit
 steps:
-  - save_cach:
+  - save_cache:
       key: v1-pyenv-{{ arch }}-myAES-{{ checksum "poetry.lock" }}
       paths:
         - "~/.pyenv"
-  - save_cach:
+  - save_cache:
       key: v1-poetry-{{ arch }}-myAES-{{ checksum "poetry.lock" }}
       paths:
         - "~/.cache/pypoetry"
-  - save_cach:
+  - save_cache:
       key: v1-precommit-{{ arch }}-myAES-{{ checksum "poetry.lock" }}
       paths:
         - "~/.cache/pre-commit"
