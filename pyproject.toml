@@ -14,6 +14,9 @@ keywords = [
     "encryption"
 ]
 
+[tool.poetry.scripts]
+myAES = "myAES.main:cli"
+
 [tool.poetry.dependencies]
 python = "3.8.12"
 pre-commit = "^2.15.0"
