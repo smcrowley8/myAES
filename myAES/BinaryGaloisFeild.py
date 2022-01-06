@@ -13,7 +13,7 @@ class GF2(BaseModel):
 
     # add verifiers for setting binary field based on init value
     # add verifyer for setting gf degree on init
-
+    @classmethod
     def toPolynomial(self) -> str:
         binaryList = bin(self.value)[2:]
         poly = []
@@ -33,6 +33,7 @@ class GF2(BaseModel):
                 polyString += "+ "
         return polyString
 
+    @classmethod
     def gf_degree(self, a: int) -> int:
         res = 0
         a >>= 1
@@ -41,9 +42,11 @@ class GF2(BaseModel):
             res += 1
         return res
 
+    @classmethod
     def bitfield(self, n: int) -> list:
         return [int(digit) for digit in bin(n)[2:]]
 
+    @classmethod
     def extendedEuclideanGF2(self, a: int, b: int) -> Tuple[int, int, int]:
         inita, initb = a, b  # if a and b are given as base-10 ints
         x, prevx = 0, 1
@@ -58,6 +61,7 @@ class GF2(BaseModel):
         )
         return a, prevx, prevy
 
+    @classmethod
     def modinv(self, m: BaseModel) -> int:
         gcd, x, y = self.extendedEuclideanGF2(self.value, m.value)
 

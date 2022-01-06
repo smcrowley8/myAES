@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "my-aes"
+name = "myAES"
 version = "0.1.0"
 description = "Package for giving AES methods CLI usability"
 authors = [
@@ -16,10 +16,13 @@ keywords = [
     "AES",
     "encryption"
 ]
+packages = [
+    {include = "myAES"}
+]
 
 [tool.poetry.scripts]
-myAES= "myAES.main"
-poetry = 'poetry.console:run'
+myAES= "myAES.main:cli"
+poetry = "poetry.console:run"
 
 [tool.poetry.dependencies]
 python = "3.8.12"
