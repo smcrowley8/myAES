@@ -6,11 +6,12 @@ authors = ["Sean Crowley <smcrowley8@gmail.com>", "Dawid Ryczek <EMAIL>"]
 maintainers = ["Sean Crowley <smcrowley8@gmail.com>", "Dawid Ryczek <EMAIL>"]
 readme = "README.md"
 homepage = ""
-repository = "https://github.com/smcrowley8/backendTEMP"
+repository = "https://github.com/smcrowley8/myAES"
 keywords = [
     "Poetry",
-    "Python",
-    "Webscraping"
+    "CLI",
+    "AES",
+    "encryption"
 ]
 
 [tool.poetry.dependencies]

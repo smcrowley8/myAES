@@ -16,7 +16,7 @@ def cli() -> None:
     console.log("Welcome to myAES")
 
 
-@cli.command()
+@click.command()
 @click.option("-file", type=click.types.Path, help="Path to file to be encrpyted")
 @click.option(
     "--debug",
