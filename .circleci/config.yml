@@ -139,7 +139,7 @@ jobs:
                 name: Install Dependencies
             - run:
                 command: |
-                    poetry run myAES test-command --repeat "test phrase"
+                    poetry run my-aes test-command --repeat "test phrase"
 
                     if [[ $(!!) != "test phrase" ]]; then
 

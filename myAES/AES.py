@@ -1,7 +1,7 @@
 # import codecs
-
-from GaloisField.BinaryGaloisFeild import GF2
 from rich.console import Console
+
+from myAES.BinaryGaloisFeild import GF2
 
 # in future, replace all comments with assume with some sort of error checking
 

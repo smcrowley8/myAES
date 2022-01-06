@@ -2,7 +2,7 @@
 ignore = E203,E501,E731,W503,W605
 import-order-style = google
 application-import-names =
-    {{ cookiecutter.package_name }}
+    myAES
 exclude =
     *vendor*
     .venv

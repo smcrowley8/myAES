@@ -1,9 +1,8 @@
 """Main CLI entry point"""
-
 import click
 from rich.console import Console  # , ConsoleThreadLocals
 
-from .AES.AES import AES
+from myAES.AES import AES
 
 console = Console()
 

@@ -1,8 +1,11 @@
 [tool.poetry]
-name = "myAES"
+name = "my-aes"
 version = "0.1.0"
-description = ""
-authors = ["Sean Crowley <smcrowley8@gmail.com>", "Dawid Ryczek <EMAIL>"]
+description = "Package for giving AES methods CLI usability"
+authors = [
+    "Sean Crowley <smcrowley8@gmail.com>",
+    "Dawid Ryczek <EMAIL>"
+]
 maintainers = ["Sean Crowley <smcrowley8@gmail.com>", "Dawid Ryczek <EMAIL>"]
 readme = "README.md"
 homepage = ""
@@ -15,7 +18,8 @@ keywords = [
 ]
 
 [tool.poetry.scripts]
-myAES = "myAES.main:cli"
+myAES= "myAES.main"
+poetry = 'poetry.console:run'
 
 [tool.poetry.dependencies]
 python = "3.8.12"
