@@ -166,9 +166,5 @@ workflows:
                         ignore:
                             - main
             - package-test:
-                filters:
-                    branches:
-                        ignore:
-                            - main
                 requires: build-test
 
