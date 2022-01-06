@@ -112,7 +112,6 @@ jobs:
             - checkout
             - circleci-cli/install
             - poetry-configure
-            - bump-branch-version
             - run:
                 command: poetry install
                 name: Install Dependencies

@@ -10,7 +10,7 @@ steps:
   - circleci-cli/install
 #  - restore-test-cache
   - poetry-configure
-  - bump-branch-version
+#  - bump-branch-version
   - run:
       name: Install Dependencies
       command: poetry install
