@@ -22,7 +22,6 @@ packages = [
 
 [tool.poetry.scripts]
 myAES= "myAES.main:cli"
-poetry = "poetry.console:run"
 
 [tool.poetry.dependencies]
 python = "3.8.12"
