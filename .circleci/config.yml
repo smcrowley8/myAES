@@ -128,8 +128,8 @@ jobs:
                 name: Run tests
             - save-test-cache
     package-test:
-        description: null
-        executor: null
+        description: Test that the package can be installed and used
+        executor: default
         steps:
             - checkout
             - circleci-cli/install
@@ -165,4 +165,10 @@ workflows:
                     branches:
                         ignore:
                             - main
+            - package-test:
+                filters:
+                    branches:
+                        ignore:
+                            - main
+                requires: build-test
 

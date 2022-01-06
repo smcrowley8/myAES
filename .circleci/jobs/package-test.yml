@@ -1,5 +1,5 @@
-description:
-executor:
+description: Test that the package can be installed and used
+executor: default
 steps:
   - checkout
   - circleci-cli/install
