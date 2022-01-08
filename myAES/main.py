@@ -16,14 +16,14 @@ def cli() -> None:
 
 
 @click.command()
-@click.option("-file", type=click.types.Path, help="Path to file to be encrpyted")
+@click.option("-file", type=click.types.STRING, help="Path to file to be encrpyted")
 @click.option(
     "--debug",
     type=click.types.BOOL,
     default=False,
     help="Whether or not to run AES and GF2 with debug logs on",
 )
-def encrypt(file: click.types.Path, debug: bool) -> None:
+def encrypt(file: click.types.STRING, debug: bool) -> None:
     """Will use aes to encrypt file at given path"""
     aes = AES(printStuff=debug)
     console.log(type(aes))
