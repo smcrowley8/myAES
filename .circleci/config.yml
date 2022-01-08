@@ -144,7 +144,7 @@ jobs:
 
                     poetry run myAES test-command --repeat "test phrase"
 
-                    poetry run myAES encrpyt
+                    poetry run myAES encrypt
                 name: Test CLI command
 orbs:
     aws-cli: circleci/aws-cli@2.0.3
