@@ -1,31 +1,47 @@
 """Main CLI entry point"""
-import sys 
+import click
+from rich.console import Console  # , ConsoleThreadLocals
 
-import click 
-from rich.console import Console, ConsoleThreadLocals
+from myAES.AES import AES
 
-from .AES.AES import AES 
-from .GaloisField.BinaryGaloisFeild import GF2
+console = Console()
+
 
 @click.group()
-def cli()->None: 
+def cli() -> None:
     """Main entrypoint for CLI"""
 
     console = Console()
     console.log("Welcome to myAES")
 
+
 @cli.command()
 @click.option(
-    "-file",
-    type=click.types.Path,
-    help="Path to file to be encrpyted"
+    "-file", type=click.types.STRING, default="", help="Path to file to be encrpyted"
 )
 @click.option(
     "--debug",
-    type = click.types.BOOL,
+    type=click.types.BOOL,
     default=False,
-    help="Whether or not to run AES and GF2 with debug logs on"
+    help="Whether or not to run AES and GF2 with debug logs on",
 )
-def encrypt(file:click.types.Path, debug:bool)->None:
+def encrypt(file: click.types.STRING, debug: bool) -> None:
     """Will use aes to encrypt file at given path"""
-    pass
+    aes = AES(printStuff=debug)
+    console.log(type(aes))
+
+
+@cli.command()
+@click.option(
+    "--repeat",
+    type=click.types.STRING,
+    default="no input",
+    help="phrase/word to be echo'd",
+)
+def test_command(repeat: click.types.STRING) -> None:
+    console.log(repeat)
+
+
+if __name__ == "__main__":
+    """Run main cli"""
+    cli()

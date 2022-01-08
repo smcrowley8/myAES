@@ -1,0 +1,13 @@
+jobs:
+  - build-test:
+      filters:
+        branches:
+          ignore:
+            - main
+  - package-test:
+      filters:
+        branches:
+          ignore:
+            - main
+      requires:
+        - build-test

@@ -9,6 +9,7 @@ if [[ "$CI" == "true" ]]; then
     fi
     touch "$CRUMB"
 fi
+
 DIR= "$(cd '$(dirname "${BASH_SOURCE[0]}")' >/dev/null 2>&1 && pwd)"
 source "${DIR}/common.sh"
 
@@ -19,7 +20,7 @@ fi
 
 pushd "$REPO_ROOT" > /dev/null
 circleci config pack .circleci > .circleci/config.yml
-if [[ $? =ne 0 ]]; then
+if [[ $? -ne 0 ]]; then
     echo "Failed to validate .circleci/config.yml. please fix"
     exit 1
 fi

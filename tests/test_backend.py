@@ -1,6 +1,6 @@
+import pytest 
 from myAES import __version__
 
-# from tests import <TEST_MODULE>
 
 
 def test_version():
