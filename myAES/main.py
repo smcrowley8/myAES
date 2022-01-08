@@ -16,7 +16,9 @@ def cli() -> None:
 
 
 @cli.command()
-@click.option("-file", type=click.types.STRING, help="Path to file to be encrpyted")
+@click.option(
+    "-file", type=click.types.STRING, default="", help="Path to file to be encrpyted"
+)
 @click.option(
     "--debug",
     type=click.types.BOOL,
