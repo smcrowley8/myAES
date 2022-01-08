@@ -1,19 +1,23 @@
-from typing import Optional, Tuple
+"""Binary Galois Field object with math operators overwritten for easier use by AES"""
+from __future__ import annotations
 
-from pydantic import BaseModel
+from typing import Tuple, Union
+
 from rich.console import Console
 
 
-class GF2(BaseModel):
+class GF2:
     """Class representing a binary galois field"""
 
-    console: Console = Console()
-    value: int
-    degree: Optional[int]
+    def __init__(self, value: int):
+        # check if string
+        self.valueErrorMsg = "must be of class GF2"
+        self.value = value
+        self.degree = self.gf_degree(value)
+        self.console = Console()
 
     # add verifiers for setting binary field based on init value
     # add verifyer for setting gf degree on init
-    @classmethod
     def toPolynomial(self) -> str:
         binaryList = bin(self.value)[2:]
         poly = []
@@ -33,7 +37,6 @@ class GF2(BaseModel):
                 polyString += "+ "
         return polyString
 
-    @classmethod
     def gf_degree(self, a: int) -> int:
         res = 0
         a >>= 1
@@ -42,11 +45,9 @@ class GF2(BaseModel):
             res += 1
         return res
 
-    @classmethod
     def bitfield(self, n: int) -> list:
         return [int(digit) for digit in bin(n)[2:]]
 
-    @classmethod
     def extendedEuclideanGF2(self, a: int, b: int) -> Tuple[int, int, int]:
         inita, initb = a, b  # if a and b are given as base-10 ints
         x, prevx = 0, 1
@@ -61,8 +62,7 @@ class GF2(BaseModel):
         )
         return a, prevx, prevy
 
-    @classmethod
-    def modinv(self, m: BaseModel) -> int:
+    def modinv(self, m: GF2) -> int:
         gcd, x, y = self.extendedEuclideanGF2(self.value, m.value)
 
         if gcd != 1:
@@ -91,7 +91,7 @@ class GF2(BaseModel):
             x += 1  # shits and giggles
             return x & temp  # restrict to d bits
 
-    def __and__(self, obj: BaseModel) -> BaseModel:
+    def __and__(self, obj: Union[GF2, int]) -> GF2:
         """Overwrite AND operator for class"""
         if isinstance(obj, GF2):
             return GF2(self.value & obj.value)
@@ -100,7 +100,7 @@ class GF2(BaseModel):
         else:
             raise ValueError("Object not of type GF2 or int")
 
-    def __or__(self, obj: BaseModel) -> BaseModel:
+    def __or__(self, obj: Union[GF2, int]) -> GF2:
         """Overwrite OR operator for class"""
         if isinstance(obj, GF2):
             return GF2(self.value | obj.value)
@@ -109,7 +109,7 @@ class GF2(BaseModel):
         else:
             raise ValueError("Object not of type GF2 or int")
 
-    def __xor__(self, obj: BaseModel) -> BaseModel:
+    def __xor__(self, obj: Union[GF2, int]) -> GF2:
         """Overwrite XOR operator for class"""
         if isinstance(obj, GF2):
             return GF2(self.value ^ obj.value)
@@ -118,7 +118,7 @@ class GF2(BaseModel):
         else:
             raise ValueError("Object not of type GF2 or int")
 
-    def __lshift__(self, obj: BaseModel) -> BaseModel:
+    def __lshift__(self, obj: Union[GF2, int]) -> GF2:
         """Overwrite LSHIT operator for class"""
         if isinstance(obj, GF2):
             return GF2(self.value << obj.value)
@@ -127,7 +127,7 @@ class GF2(BaseModel):
         else:
             raise ValueError("Object not of type GF2 or int")
 
-    def __rshift__(self, obj: BaseModel) -> BaseModel:
+    def __rshift__(self, obj: Union[GF2, int]) -> GF2:
         """Overwrite RSHIFT operator for class"""
         if isinstance(obj, GF2):
             return GF2(self.value >> obj.value)
@@ -136,11 +136,11 @@ class GF2(BaseModel):
         else:
             raise ValueError("Object not of type GF2 or int")
 
-    def __invert__(self) -> BaseModel:
+    def __invert__(self) -> GF2:
         """Overwrite invert"""
         return GF2(~self.value)
 
-    def __mul__(self, obj: BaseModel) -> BaseModel:
+    def __mul__(self, obj: GF2) -> GF2:
         """Overwrite MUL operator for class"""
         if not isinstance(obj, GF2):
             raise ValueError("Object not of type GF2")
@@ -163,7 +163,7 @@ class GF2(BaseModel):
                 pieces[i + 1] = temp
             return GF2(temp)
 
-    def __add__(self, obj: BaseModel) -> BaseModel:
+    def __add__(self, obj: GF2) -> GF2:
         """
         if isinstance(obj, GF2):
             return self.value ^ obj.value
@@ -174,7 +174,7 @@ class GF2(BaseModel):
         """
         return self.__xor__(obj)
 
-    def __mod__(self, obj: BaseModel) -> BaseModel:
+    def __mod__(self, obj: GF2) -> GF2:
         """Overwrite MOD operator for class"""
         if not isinstance(obj, GF2):
             raise ValueError(self.valueErrorMsg)
