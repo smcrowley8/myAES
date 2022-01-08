@@ -15,7 +15,7 @@ def cli() -> None:
     console.log("Welcome to myAES")
 
 
-@click.command()
+@cli.command()
 @click.option("-file", type=click.types.STRING, help="Path to file to be encrpyted")
 @click.option(
     "--debug",
@@ -29,7 +29,7 @@ def encrypt(file: click.types.STRING, debug: bool) -> None:
     console.log(type(aes))
 
 
-@click.command()
+@cli.command()
 @click.option(
     "--repeat",
     type=click.types.STRING,
