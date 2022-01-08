@@ -9,6 +9,8 @@ steps:
   - run:
       name: Get branch variables
       command: >
+        set -eo pipefail
+
         if ! (command -v jq >/dev/null 2>&1); then
           echo "install jq to continue"
           exit 1
