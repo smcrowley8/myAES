@@ -7,6 +7,6 @@
 **/*.egg-info
 **/*.pyc
 **/dist
-
+./mypy_cache
 # Pycharm
 .idea
