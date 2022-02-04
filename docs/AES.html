@@ -1,0 +1,2864 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>myAES.AES API documentation</title>
+<meta name="description" content="Module for AES encrpytion/decryption" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>myAES.AES</code></h1>
+</header>
+<section id="section-intro">
+<p>Module for AES encrpytion/decryption</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Module for AES encrpytion/decryption&#34;&#34;&#34;
+# import codecs
+from rich.console import Console
+
+from myAES.BinaryGaloisFeild import GF2
+
+# in future, replace all comments with assume with some sort of error checking
+
+&#34;&#34;&#34;************************ ISSUE ***************
+the _setString methods needto handle ascii values that are no good somehow
+&#34;&#34;&#34;
+
+
+class AES:
+    # **************** end of cipher stuff ************
+    def _setCtString(self, ctList: list) -&gt; None:
+        &#34;&#34;&#34;set cipher text string&#34;&#34;&#34;
+        tempString = &#34;&#34;
+        self.ctString = &#34;&#34;
+        for e in ctList:
+            if e &lt; 32 or e == 127:
+                # get rid of bad chars
+                e += 127
+            temp = chr(e)
+            tempString += temp
+        self.ctString = tempString
+        self.ctStrings.append(tempString)
+
+    def getCtString(self) -&gt; str:
+        &#34;&#34;&#34;Get cipher text string&#34;&#34;&#34;
+        strLength = len(self.ctStrings)
+        if strLength == 0:
+            raise ValueError(&#34;no ct string was made, please try again&#34;)
+        elif strLength == 1:
+            return self.ctString
+        else:
+            ctStr = &#34;&#34;
+            for char in self.ctStrings:
+                ctStr += char
+            return ctStr
+
+    def _setPtString(self, ptList: list) -&gt; None:
+        &#34;&#34;&#34;set plain text String&#34;&#34;&#34;
+        s = &#34;&#34;
+        self.ptString = &#34;&#34;
+        for e in ptList:
+            if e &lt; 32 or e == 127:
+                # get rid of bad chars
+                e += 128
+            temp = chr(e)
+            s += temp
+        self.ptString = s
+        self.ptStrings.append(s)
+
+    def getPtString(self) -&gt; str:
+        &#34;&#34;&#34;Get plain text string&#34;&#34;&#34;
+        ptLenth = len(self.ptStrings)
+        if ptLenth == 0:
+            raise ValueError(&#34;no pt string was made, please try again&#34;)
+        elif ptLenth == 1:
+            return self.ptString
+        else:
+            s = &#34;&#34;
+            for e in self.ptStrings:
+                s += e
+            return s
+
+    # **************** setup stuff ***************
+    def makeMat(self, pt: list) -&gt; list:
+        &#34;&#34;&#34;Make a 2d list based off of the bits of the plain text given&#34;&#34;&#34;
+        # assume pt is a list of bytes
+        ptMat = []
+        for i in range(4):
+            temp = []
+            for j in range(4):
+                temp.append(pt[i + (4 * j)])
+            ptMat.append(temp)
+        return ptMat
+
+    # ************ decrypt stuff ***************
+
+    def byteSubInv(self, m: list) -&gt; list:
+        &#34;&#34;&#34;Given a matrix, do...&#34;&#34;&#34;
+        for i in range(len(m)):
+            for j in range(len(m[i])):
+                x, y = self.byteToNibbles(m[i][j])
+                m[i][j] = self.sboxINV[x][y]
+        return m
+
+    def shiftRowInv(self, m: list) -&gt; list:
+        &#34;&#34;&#34;Given a matrix, shift rows up&#34;&#34;&#34;
+        # first row not effected
+        transposedMat = self.transposeMat(m)
+        for i in range(1, 4):  # skip first row
+            transposedMat[i] = self.shiftRight(transposedMat[i], i)
+        # re transpose for future matrix stuff
+        workingMat = self.transposeMat(transposedMat)
+        return workingMat
+
+    def mixColInv(self, m: list) -&gt; list:
+        &#34;&#34;&#34;given a matrix, perform inverse GF matrix multiplication&#34;&#34;&#34;
+        &#34;&#34;&#34;
+        coefficient = [
+            [GF2(0x0e), GF2(0x0b), GF2(0x0d), GF2(0x09)],
+            [GF2(0x09), GF2(0x0e), GF2(0x0b), GF2(0x0d)],
+            [GF2(0x0d), GF2(0x09), GF2(0x0e), GF2(0x0b)],
+            [GF2(0x0b), GF2(0x0d), GF2(0x09), GF2(0x0e)]
+        ]
+        &#34;&#34;&#34;
+        coefficient = [
+            [14, 11, 13, 9],
+            [9, 14, 11, 13],
+            [13, 9, 14, 11],
+            [11, 13, 9, 14],
+        ]
+        workingMat = self.GFmatMul(coefficient, m)
+        return workingMat
+
+    # ****************** key stuff ****************
+    def keyTransform(self, k: list, n: int) -&gt; list:
+        &#34;&#34;&#34;will take a 1d list, left shift it, apply sbox to it&#34;&#34;&#34;
+        # n = the row being made
+        # only called if n%4=0 so no check needed
+        t = []
+        for ele in k:  # needed for dereferencing
+            t.append(ele)
+        t = self.shiftLeft(t, 1)
+        for i in range(len(t)):
+            a, b = self.byteToNibbles(t[i])
+            t[i] = self.sbox[a][b]
+
+        # and then the first element is XOR&#39;d with 2^((n-4)/4)
+        temp = t[0] ^ (2 ** int(((n - 4) / 4)))
+        # check if out of bounds of a single byte
+        # if it is out of bounds do i multiply mod by 0b100000000 or do i mod by GF2(8) reduction polynomial?
+        t[0] = temp
+        return t
+
+    # note
+    # the keymat return here is created by rows, so key0=row 0, key1=row 1
+    # creating the 40 extra keys will be done by added rows instead of columns
+    def generateKeyMat(self, key: list) -&gt; list:
+        &#34;&#34;&#34;given a key, will generate a matrix for AES&#34;&#34;&#34;
+        if isinstance(key, list):
+            keyMat = []
+            for i in range(4):
+                row = [key[i] for i in range(i * 4, (i * 4) + 4)]
+                keyMat.append(row)
+            return keyMat
+        else:
+            raise TypeError(f&#34;key must be a list of ints, got {type(key)}&#34;)
+
+    def listXOR(self, a: list, b: list) -&gt; list:
+        &#34;&#34;&#34;XOR of list of bits&#34;&#34;&#34;
+        # assume of same length
+        return [a[i] ^ b[i] for i in range(len(a))]
+
+    # will add 40 rows to keymat and then  transpose it so it&#39;s ready for encrypt/decrypt
+    def generateKeys(self, key: list) -&gt; list:
+        &#34;&#34;&#34;given a key, will generate future rounds keys&#34;&#34;&#34;
+        keyMat = self.generateKeyMat(key)
+        for n in range(4, 44):  # add 40 rows (should be 4,44)
+            a = keyMat[n - 4]
+            temp = keyMat
+            if n % 4 == 0:
+                temp2 = temp[n - 1]
+                b = self.keyTransform(temp2, n)
+            else:
+                b = keyMat[n - 1]
+            newRow = self.listXOR(a, b)
+            keyMat.append(newRow)
+        return keyMat
+
+    def generateRoundKey(self, key: list, round: int) -&gt; list:
+        &#34;&#34;&#34;Generate a rounds key based on the initial key&#34;&#34;&#34;
+        workingMat = key[4 * round : (4 * round) + 4]
+        # transpose?
+        return workingMat
+
+    # ************* encryption stuff ****************
+    def addRoundKey(self, m: list, key: list) -&gt; list:
+        &#34;&#34;&#34;adds this rounds key to working matrix&#34;&#34;&#34;
+        answer = []
+        for i in range(4):  # always 4?
+            temp = []
+            for j in range(4):
+                temp.append(m[i][j] ^ key[i][j])
+            answer.append(temp)
+        return answer
+
+    def mixCol(self, m: list) -&gt; list:
+        &#34;&#34;&#34;performs mix column method on working matrix&#34;&#34;&#34;
+        &#34;&#34;&#34;
+        one=GF2(1)
+        two=GF2(2)
+        three=GF2(3)
+        coefficient=[
+            [two, one,one,three],
+            [three, two, one, one],
+            [one, three, two, one],
+            [one, one, three, two]
+        ] #this is transposed because i do things with rows instead of columns
+        &#34;&#34;&#34;
+        coefficient = [
+            [2, 3, 1, 1],
+            [1, 2, 3, 1],
+            [1, 1, 2, 3],
+            [3, 1, 1, 2],
+        ]  # not transposed bc matmul will transpose state
+        # m=self.toGF(m)
+        # time to multiply
+        workingMat = self.GFmatMul(coefficient, m)
+        return workingMat
+
+    def shiftRow(self, m: list) -&gt; list:
+        &#34;&#34;&#34;shift matrix rows down&#34;&#34;&#34;
+        # this object internally refers to the matrices as the transpose of what they are conceptually
+        # to shit a row one must shift that column instead
+        temp = self.transposeMat(m)
+        for i in range(1, 4):  # skip first row
+            temp[i] = self.shiftLeft(temp[i], i)
+        # re transpose for future matrix stuff
+        workingMat = self.transposeMat(temp)
+        return workingMat
+
+    def byteSub(self, m: list) -&gt; list:
+        &#34;&#34;&#34;do...&#34;&#34;&#34;
+        for i in range(len(m)):
+            for j in range(len(m[i])):
+                x, y = self.byteToNibbles(m[i][j])
+                m[i][j] = self.sbox[x][y]
+        return m
+
+    def encrypt(self, pt: list, key: list, numrounds: int) -&gt; list:
+        &#34;&#34;&#34;perform encryption&#34;&#34;&#34;
+
+        &#34;&#34;&#34;
+        #if a string is passed preparation is needed
+        if isinstance(pt, str):
+            temp_prep = AES_PREP(PT=pt)
+            ptList=temp_prep.getPtList()
+            if isinstance(ptList[0], list):
+                #this means we have a list of lists and must encrypt for each list
+                for i in range(len(ptList)-1):
+                    #do all but the last one, which will be done here
+                    p=ptList.pop(0)
+                    self.encrypt(p, key, numrounds)
+                #now we set pt so we can use the last list given
+                pt=ptList.pop(0)
+            elif isinstance(ptList[0], int):
+                #this is what we want, now we can continue
+                pt=ptList.copy()
+            else:
+                raise TypeError(&#34;pt must be a string or list of bytes, please try again&#34;)
+        &#34;&#34;&#34;
+
+        # generate pt matrix for computations
+        ptMat = self.transposeMat(self.makeMat(pt))  # makeMat is formatted conceptually
+
+        # the key matrix is made in generate keys
+        extendedKeyMat = self.generateKeys(key)
+        # ARK on original key
+        k0 = self.generateRoundKey(extendedKeyMat, 0)
+        workingMat = self.addRoundKey(m=ptMat, key=k0)
+        if self.print:
+            self.console.log(&#34;pt mat&#34;)
+            self.printHexMatrix(ptMat)
+            self.console.log(&#34;key 0 &#34;)
+            self.printHexMatrix(k0)
+            self.console.log(&#34;result from initial ARK&#34;)
+            self.printHexMatrix(workingMat)
+        # n-1 rounds for 4 layers (BS, SR, MC, ARK) using round 1 to n-1 key
+        # round N: BS, SR, ARK using round N key
+        # 128 pt -&gt; 4X4 matrix, each element is a byte
+        for i in range(1, numrounds + 1):
+            byteSubResult = self.byteSub(workingMat)
+
+            shiftRowResult = self.shiftRow(byteSubResult)
+
+            mixColResult = self.mixCol(shiftRowResult)
+
+            roundKey = self.generateRoundKey(extendedKeyMat, i)
+            nextRoundMat = self.addRoundKey(mixColResult, key=roundKey)
+            if self.print:
+                self.console.log(&#34;round &#34;, i, &#34; key&#34;)
+                self.printHexMatrix(roundKey)
+                self.console.log(&#34;result from byteSub round &#34;, i)
+                self.printHexMatrix(byteSubResult)
+                self.console.log(&#34;result from shiftRow round &#34;, i)
+                self.printHexMatrix(shiftRowResult)
+                self.console.log(&#34;result from mixCol round &#34;, i)
+                self.printHexMatrix(mixColResult)
+                self.console.log(&#34;result from ARK round &#34;, i)
+                self.printHexMatrix(nextRoundMat)
+
+            workingMat = nextRoundMat
+        # this is for setting the ct string
+        temp = []
+        for row in workingMat:
+            temp += row
+        # make 2d into 1d
+        self._setCtString(temp)  # set ctString
+        return workingMat  # should first turn workingMat into a string?
+
+    def decrypt(self, ct: list, key: list, numrounds: int) -&gt; list:
+        &#34;&#34;&#34;perform decryption&#34;&#34;&#34;
+
+        &#34;&#34;&#34;
+        if isinstance(ct, str):
+            temp_prep = AES_PREP(CT=ct)
+            ctList=temp_prep.getCtList()
+            if isinstance(ctList[0], list):
+                #this means we have a list of lists and must encrypt for each list
+                for i in range(len(ctList)-1):
+                    #do all but the last one, which will be done here
+                    c=ctList.pop(0)
+                    self.decrypt(c, key, numrounds)
+                #now we set pt so we can use the last list given
+                ct=ctList.pop(0)
+            elif isinstance(ctList[0], int):
+                #this is what we want, now we can continue
+                ct=ctList.copy()
+            else:
+                raise TypeError(&#34;pt must be a string or list of bytes, please try again&#34;)
+        &#34;&#34;&#34;
+        # each layer is invertible
+        ctMat = self.transposeMat(self.makeMat(ct))  # makeMat is formatted conceptually
+        # we want the transpose of the conceptual ptMat
+
+        extendedKeyMat = self.generateKeys(key)
+
+        # ARK on original key
+        k0 = self.generateRoundKey(extendedKeyMat, numrounds)
+        # if 10 rounds we want the key from k40:k43
+
+        workingMat = self.addRoundKey(m=ctMat, key=k0)  # initial ARK
+        # add print check and statements here
+        if self.print:
+            self.console.log(&#34;ct mat&#34;)
+            self.printHexMatrix(ctMat)
+            self.console.log(&#34;key 0 &#34;)
+            self.printHexMatrix(k0)
+            self.console.log(&#34;result from initial ARK&#34;)
+            self.printHexMatrix(workingMat)
+        # first round will use key9 (k36:39)
+        for i in reversed(range(numrounds)):
+            if i &gt; 0 or numrounds == 1:
+                IMixColResult = self.mixColInv(workingMat)
+                workingMat = IMixColResult
+
+            IShiftRowResult = self.shiftRowInv(workingMat)
+
+            # then inverse bytesub
+            IByteSubResult = self.byteSubInv(IShiftRowResult)
+
+            # then add round key
+            roundKey = self.generateRoundKey(extendedKeyMat, i)
+            IARKresult = self.addRoundKey(IByteSubResult, roundKey)
+
+            workingMat = IARKresult
+
+            # add prints here
+            if self.print:
+                self.console.log(&#34;round &#34;, i, &#34; key&#34;)
+                self.printHexMatrix(roundKey)
+                if i &gt; 0 or numrounds == 1:
+                    self.console.log(&#34;result from mixCol round &#34;, i)
+                    self.printHexMatrix(IMixColResult)
+                self.console.log(&#34;result from inverse shiftRow round &#34;, i)
+                self.printHexMatrix(IShiftRowResult)
+                self.console.log(&#34;result from inverse byteSub round &#34;, i)
+                self.printHexMatrix(IByteSubResult)
+                self.console.log(&#34;result from ARK round &#34;, i)
+                self.printHexMatrix(IARKresult)
+
+        temp = []
+        for row in workingMat:
+            temp += row
+        # make 2d into 1d
+        self._setPtString(temp)  # set ctString
+        return workingMat
+
+    def __init__(self, printStuff: bool = False) -&gt; None:
+        # do something
+        self.console = Console()
+        self.print = printStuff
+        self.mod = 0b100011011
+
+        self.sbox = [
+            [
+                0x63,
+                0x7C,
+                0x77,
+                0x7B,
+                0xF2,
+                0x6B,
+                0x6F,
+                0xC5,
+                0x30,
+                0x01,
+                0x67,
+                0x2B,
+                0xFE,
+                0xD7,
+                0xAB,
+                0x76,
+            ],
+            [
+                0xCA,
+                0x82,
+                0xC9,
+                0x7D,
+                0xFA,
+                0x59,
+                0x47,
+                0xF0,
+                0xAD,
+                0xD4,
+                0xA2,
+                0xAF,
+                0x9C,
+                0xA4,
+                0x72,
+                0xC0,
+            ],
+            [
+                0xB7,
+                0xFD,
+                0x93,
+                0x26,
+                0x36,
+                0x3F,
+                0xF7,
+                0xCC,
+                0x34,
+                0xA5,
+                0xE5,
+                0xF1,
+                0x71,
+                0xD8,
+                0x31,
+                0x15,
+            ],
+            [
+                0x04,
+                0xC7,
+                0x23,
+                0xC3,
+                0x18,
+                0x96,
+                0x05,
+                0x9A,
+                0x07,
+                0x12,
+                0x80,
+                0xE2,
+                0xEB,
+                0x27,
+                0xB2,
+                0x75,
+            ],
+            [
+                0x09,
+                0x83,
+                0x2C,
+                0x1A,
+                0x1B,
+                0x6E,
+                0x5A,
+                0xA0,
+                0x52,
+                0x3B,
+                0xD6,
+                0xB3,
+                0x29,
+                0xE3,
+                0x2F,
+                0x84,
+            ],
+            [
+                0x53,
+                0xD1,
+                0x00,
+                0xED,
+                0x20,
+                0xFC,
+                0xB1,
+                0x5B,
+                0x6A,
+                0xCB,
+                0xBE,
+                0x39,
+                0x4A,
+                0x4C,
+                0x58,
+                0xCF,
+            ],
+            [
+                0xD0,
+                0xEF,
+                0xAA,
+                0xFB,
+                0x43,
+                0x4D,
+                0x33,
+                0x85,
+                0x45,
+                0xF9,
+                0x02,
+                0x7F,
+                0x50,
+                0x3C,
+                0x9F,
+                0xA8,
+            ],
+            [
+                0x51,
+                0xA3,
+                0x40,
+                0x8F,
+                0x92,
+                0x9D,
+                0x38,
+                0xF5,
+                0xBC,
+                0xB6,
+                0xDA,
+                0x21,
+                0x10,
+                0xFF,
+                0xF3,
+                0xD2,
+            ],
+            [
+                0xCD,
+                0x0C,
+                0x13,
+                0xEC,
+                0x5F,
+                0x97,
+                0x44,
+                0x17,
+                0xC4,
+                0xA7,
+                0x7E,
+                0x3D,
+                0x64,
+                0x5D,
+                0x19,
+                0x73,
+            ],
+            [
+                0x60,
+                0x81,
+                0x4F,
+                0xDC,
+                0x22,
+                0x2A,
+                0x90,
+                0x88,
+                0x46,
+                0xEE,
+                0xB8,
+                0x14,
+                0xDE,
+                0x5E,
+                0x0B,
+                0xDB,
+            ],
+            [
+                0xE0,
+                0x32,
+                0x3A,
+                0x0A,
+                0x49,
+                0x06,
+                0x24,
+                0x5C,
+                0xC2,
+                0xD3,
+                0xAC,
+                0x62,
+                0x91,
+                0x95,
+                0xE4,
+                0x79,
+            ],
+            [
+                0xE7,
+                0xC8,
+                0x37,
+                0x6D,
+                0x8D,
+                0xD5,
+                0x4E,
+                0xA9,
+                0x6C,
+                0x56,
+                0xF4,
+                0xEA,
+                0x65,
+                0x7A,
+                0xAE,
+                0x08,
+            ],
+            [
+                0xBA,
+                0x78,
+                0x25,
+                0x2E,
+                0x1C,
+                0xA6,
+                0xB4,
+                0xC6,
+                0xE8,
+                0xDD,
+                0x74,
+                0x1F,
+                0x4B,
+                0xBD,
+                0x8B,
+                0x8A,
+            ],
+            [
+                0x70,
+                0x3E,
+                0xB5,
+                0x66,
+                0x48,
+                0x03,
+                0xF6,
+                0x0E,
+                0x61,
+                0x35,
+                0x57,
+                0xB9,
+                0x86,
+                0xC1,
+                0x1D,
+                0x9E,
+            ],
+            [
+                0xE1,
+                0xF8,
+                0x98,
+                0x11,
+                0x69,
+                0xD9,
+                0x8E,
+                0x94,
+                0x9B,
+                0x1E,
+                0x87,
+                0xE9,
+                0xCE,
+                0x55,
+                0x28,
+                0xDF,
+            ],
+            [
+                0x8C,
+                0xA1,
+                0x89,
+                0x0D,
+                0xBF,
+                0xE6,
+                0x42,
+                0x68,
+                0x41,
+                0x99,
+                0x2D,
+                0x0F,
+                0xB0,
+                0x54,
+                0xBB,
+                0x16,
+            ],
+        ]
+        self.sboxINV = [
+            [
+                0x52,
+                0x09,
+                0x6A,
+                0xD5,
+                0x30,
+                0x36,
+                0xA5,
+                0x38,
+                0xBF,
+                0x40,
+                0xA3,
+                0x9E,
+                0x81,
+                0xF3,
+                0xD7,
+                0xFB,
+            ],
+            [
+                0x7C,
+                0xE3,
+                0x39,
+                0x82,
+                0x9B,
+                0x2F,
+                0xFF,
+                0x87,
+                0x34,
+                0x8E,
+                0x43,
+                0x44,
+                0xC4,
+                0xDE,
+                0xE9,
+                0xCB,
+            ],
+            [
+                0x54,
+                0x7B,
+                0x94,
+                0x32,
+                0xA6,
+                0xC2,
+                0x23,
+                0x3D,
+                0xEE,
+                0x4C,
+                0x95,
+                0x0B,
+                0x42,
+                0xFA,
+                0xC3,
+                0x4E,
+            ],
+            [
+                0x08,
+                0x2E,
+                0xA1,
+                0x66,
+                0x28,
+                0xD9,
+                0x24,
+                0xB2,
+                0x76,
+                0x5B,
+                0xA2,
+                0x49,
+                0x6D,
+                0x8B,
+                0xD1,
+                0x25,
+            ],
+            [
+                0x72,
+                0xF8,
+                0xF6,
+                0x64,
+                0x86,
+                0x68,
+                0x98,
+                0x16,
+                0xD4,
+                0xA4,
+                0x5C,
+                0xCC,
+                0x5D,
+                0x65,
+                0xB6,
+                0x92,
+            ],
+            [
+                0x6C,
+                0x70,
+                0x48,
+                0x50,
+                0xFD,
+                0xED,
+                0xB9,
+                0xDA,
+                0x5E,
+                0x15,
+                0x46,
+                0x57,
+                0xA7,
+                0x8D,
+                0x9D,
+                0x84,
+            ],
+            [
+                0x90,
+                0xD8,
+                0xAB,
+                0x00,
+                0x8C,
+                0xBC,
+                0xD3,
+                0x0A,
+                0xF7,
+                0xE4,
+                0x58,
+                0x05,
+                0xB8,
+                0xB3,
+                0x45,
+                0x06,
+            ],
+            [
+                0xD0,
+                0x2C,
+                0x1E,
+                0x8F,
+                0xCA,
+                0x3F,
+                0x0F,
+                0x02,
+                0xC1,
+                0xAF,
+                0xBD,
+                0x03,
+                0x01,
+                0x13,
+                0x8A,
+                0x6B,
+            ],
+            [
+                0x3A,
+                0x91,
+                0x11,
+                0x41,
+                0x4F,
+                0x67,
+                0xDC,
+                0xEA,
+                0x97,
+                0xF2,
+                0xCF,
+                0xCE,
+                0xF0,
+                0xB4,
+                0xE6,
+                0x73,
+            ],
+            [
+                0x96,
+                0xAC,
+                0x74,
+                0x22,
+                0xE7,
+                0xAD,
+                0x35,
+                0x85,
+                0xE2,
+                0xF9,
+                0x37,
+                0xE8,
+                0x1C,
+                0x75,
+                0xDF,
+                0x6E,
+            ],
+            [
+                0x47,
+                0xF1,
+                0x1A,
+                0x71,
+                0x1D,
+                0x29,
+                0xC5,
+                0x89,
+                0x6F,
+                0xB7,
+                0x62,
+                0x0E,
+                0xAA,
+                0x18,
+                0xBE,
+                0x1B,
+            ],
+            [
+                0xFC,
+                0x56,
+                0x3E,
+                0x4B,
+                0xC6,
+                0xD2,
+                0x79,
+                0x20,
+                0x9A,
+                0xDB,
+                0xC0,
+                0xFE,
+                0x78,
+                0xCD,
+                0x5A,
+                0xF4,
+            ],
+            [
+                0x1F,
+                0xDD,
+                0xA8,
+                0x33,
+                0x88,
+                0x07,
+                0xC7,
+                0x31,
+                0xB1,
+                0x12,
+                0x10,
+                0x59,
+                0x27,
+                0x80,
+                0xEC,
+                0x5F,
+            ],
+            [
+                0x60,
+                0x51,
+                0x7F,
+                0xA9,
+                0x19,
+                0xB5,
+                0x4A,
+                0x0D,
+                0x2D,
+                0xE5,
+                0x7A,
+                0x9F,
+                0x93,
+                0xC9,
+                0x9C,
+                0xEF,
+            ],
+            [
+                0xA0,
+                0xE0,
+                0x3B,
+                0x4D,
+                0xAE,
+                0x2A,
+                0xF5,
+                0xB0,
+                0xC8,
+                0xEB,
+                0xBB,
+                0x3C,
+                0x83,
+                0x53,
+                0x99,
+                0x61,
+            ],
+            [
+                0x17,
+                0x2B,
+                0x04,
+                0x7E,
+                0xBA,
+                0x77,
+                0xD6,
+                0x26,
+                0xE1,
+                0x69,
+                0x14,
+                0x63,
+                0x55,
+                0x21,
+                0x0C,
+                0x7D,
+            ],
+        ]
+
+        self.ctString = &#34;&#34;
+        self.ctStrings: list = []
+        self.ptString = &#34;&#34;
+        self.ptStrings: list = []
+
+    # *****************  data manip stuff ******************
+
+    def GFdot(self, a: list, b: list) -&gt; int:
+        &#34;&#34;&#34;perform dot product on binary galois field objects&#34;&#34;&#34;
+        # something wrong with logic above
+        m = GF2(self.mod)
+        first = GF2(GF2(a[0]) * GF2(b[0])) % m
+        sec = GF2(GF2(a[1]) * GF2(b[1])) % m
+        third = GF2(GF2(a[2]) * GF2(b[2])) % m
+        fourth = GF2(GF2(a[3]) * GF2(b[3])) % m
+        temp = [first, sec, third, fourth]
+        answer = 0
+        for i in temp:
+            answer = answer ^ i
+        return answer
+
+    def getCol(self, m: list, c: int) -&gt; list:
+        &#34;&#34;&#34;get a column from the matrix as a list&#34;&#34;&#34;
+        # return column c of matrix m (list)
+        return [r[c] for r in m]
+
+    def GFmatMul(self, a: list, b: list) -&gt; list:
+        &#34;&#34;&#34;perform matrix multiplication on matrices with GF2 elements&#34;&#34;&#34;
+        workingMat = []  # answer(i,j)=a[i] dot b[][j]
+        b = self.transposeMat(b)
+        for i in range(len(a)):  # for each row in a
+            temp = []
+            for j in range(len(b[0])):  # for each col in b
+                # append to temp the product of a[i] and col j in b
+                temp.append(self.GFdot(a[i], self.getCol(b, j)))
+            workingMat.append(temp)
+        workingMat = self.transposeMat(workingMat)
+        return workingMat
+
+    def byteToNibbles(self, byte: int) -&gt; tuple:
+        &#34;&#34;&#34;breaks a byte into a tuple of nibbles&#34;&#34;&#34;
+        s = hex(byte)[2:]  # get rid of 0x
+        while len(s) &lt; 2:
+            s = &#34;0&#34; + s
+        return int(s[0], 16), int(s[1], 16)
+
+    def shiftLeft(self, r: list, n: int) -&gt; list:
+        &#34;&#34;&#34;given a list and number of shifts, performs shifts and returns new list&#34;&#34;&#34;
+        # shifts row r left n bits
+        for i in range(n):
+            temp = r.pop(0)
+            r.append(temp)
+        return r
+
+    def shiftRight(self, r: list, n: int) -&gt; list:
+        &#34;&#34;&#34;given list and number of shifts, perform shifts and return new list&#34;&#34;&#34;
+        # shifts row r right n bits
+        for i in range(n):
+            temp = r.pop(-1)
+            r.insert(0, temp)
+        return r
+
+    def transposeMat(self, m: list) -&gt; list:
+        &#34;&#34;&#34;given a matrix, returns that matrix transposed&#34;&#34;&#34;
+
+        workingMat = m.copy()
+        workingMat = list(zip(*workingMat))  # this is now a list of tuples
+        for i in range(len(workingMat)):
+            workingMat[i] = list(
+                workingMat[i]
+            )  # turn tuples to list so its a proper matrix
+        return workingMat
+
+    def printHexMatrix(self, t: list) -&gt; None:
+        m = self.transposeMat(t)
+        s = &#34;&#34;
+        for r in m:
+            for e in r:
+                temp = hex(e)[2:] + &#34; &#34;
+                if len(temp) == 2:
+                    temp = &#34;0&#34; + temp
+                s += temp
+            s += &#34;\n&#34;
+        self.console.log(s)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="myAES.AES.AES"><code class="flex name class">
+<span>class <span class="ident">AES</span></span>
+<span>(</span><span>printStuff: bool = False)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class AES:
+    # **************** end of cipher stuff ************
+    def _setCtString(self, ctList: list) -&gt; None:
+        &#34;&#34;&#34;set cipher text string&#34;&#34;&#34;
+        tempString = &#34;&#34;
+        self.ctString = &#34;&#34;
+        for e in ctList:
+            if e &lt; 32 or e == 127:
+                # get rid of bad chars
+                e += 127
+            temp = chr(e)
+            tempString += temp
+        self.ctString = tempString
+        self.ctStrings.append(tempString)
+
+    def getCtString(self) -&gt; str:
+        &#34;&#34;&#34;Get cipher text string&#34;&#34;&#34;
+        strLength = len(self.ctStrings)
+        if strLength == 0:
+            raise ValueError(&#34;no ct string was made, please try again&#34;)
+        elif strLength == 1:
+            return self.ctString
+        else:
+            ctStr = &#34;&#34;
+            for char in self.ctStrings:
+                ctStr += char
+            return ctStr
+
+    def _setPtString(self, ptList: list) -&gt; None:
+        &#34;&#34;&#34;set plain text String&#34;&#34;&#34;
+        s = &#34;&#34;
+        self.ptString = &#34;&#34;
+        for e in ptList:
+            if e &lt; 32 or e == 127:
+                # get rid of bad chars
+                e += 128
+            temp = chr(e)
+            s += temp
+        self.ptString = s
+        self.ptStrings.append(s)
+
+    def getPtString(self) -&gt; str:
+        &#34;&#34;&#34;Get plain text string&#34;&#34;&#34;
+        ptLenth = len(self.ptStrings)
+        if ptLenth == 0:
+            raise ValueError(&#34;no pt string was made, please try again&#34;)
+        elif ptLenth == 1:
+            return self.ptString
+        else:
+            s = &#34;&#34;
+            for e in self.ptStrings:
+                s += e
+            return s
+
+    # **************** setup stuff ***************
+    def makeMat(self, pt: list) -&gt; list:
+        &#34;&#34;&#34;Make a 2d list based off of the bits of the plain text given&#34;&#34;&#34;
+        # assume pt is a list of bytes
+        ptMat = []
+        for i in range(4):
+            temp = []
+            for j in range(4):
+                temp.append(pt[i + (4 * j)])
+            ptMat.append(temp)
+        return ptMat
+
+    # ************ decrypt stuff ***************
+
+    def byteSubInv(self, m: list) -&gt; list:
+        &#34;&#34;&#34;Given a matrix, do...&#34;&#34;&#34;
+        for i in range(len(m)):
+            for j in range(len(m[i])):
+                x, y = self.byteToNibbles(m[i][j])
+                m[i][j] = self.sboxINV[x][y]
+        return m
+
+    def shiftRowInv(self, m: list) -&gt; list:
+        &#34;&#34;&#34;Given a matrix, shift rows up&#34;&#34;&#34;
+        # first row not effected
+        transposedMat = self.transposeMat(m)
+        for i in range(1, 4):  # skip first row
+            transposedMat[i] = self.shiftRight(transposedMat[i], i)
+        # re transpose for future matrix stuff
+        workingMat = self.transposeMat(transposedMat)
+        return workingMat
+
+    def mixColInv(self, m: list) -&gt; list:
+        &#34;&#34;&#34;given a matrix, perform inverse GF matrix multiplication&#34;&#34;&#34;
+        &#34;&#34;&#34;
+        coefficient = [
+            [GF2(0x0e), GF2(0x0b), GF2(0x0d), GF2(0x09)],
+            [GF2(0x09), GF2(0x0e), GF2(0x0b), GF2(0x0d)],
+            [GF2(0x0d), GF2(0x09), GF2(0x0e), GF2(0x0b)],
+            [GF2(0x0b), GF2(0x0d), GF2(0x09), GF2(0x0e)]
+        ]
+        &#34;&#34;&#34;
+        coefficient = [
+            [14, 11, 13, 9],
+            [9, 14, 11, 13],
+            [13, 9, 14, 11],
+            [11, 13, 9, 14],
+        ]
+        workingMat = self.GFmatMul(coefficient, m)
+        return workingMat
+
+    # ****************** key stuff ****************
+    def keyTransform(self, k: list, n: int) -&gt; list:
+        &#34;&#34;&#34;will take a 1d list, left shift it, apply sbox to it&#34;&#34;&#34;
+        # n = the row being made
+        # only called if n%4=0 so no check needed
+        t = []
+        for ele in k:  # needed for dereferencing
+            t.append(ele)
+        t = self.shiftLeft(t, 1)
+        for i in range(len(t)):
+            a, b = self.byteToNibbles(t[i])
+            t[i] = self.sbox[a][b]
+
+        # and then the first element is XOR&#39;d with 2^((n-4)/4)
+        temp = t[0] ^ (2 ** int(((n - 4) / 4)))
+        # check if out of bounds of a single byte
+        # if it is out of bounds do i multiply mod by 0b100000000 or do i mod by GF2(8) reduction polynomial?
+        t[0] = temp
+        return t
+
+    # note
+    # the keymat return here is created by rows, so key0=row 0, key1=row 1
+    # creating the 40 extra keys will be done by added rows instead of columns
+    def generateKeyMat(self, key: list) -&gt; list:
+        &#34;&#34;&#34;given a key, will generate a matrix for AES&#34;&#34;&#34;
+        if isinstance(key, list):
+            keyMat = []
+            for i in range(4):
+                row = [key[i] for i in range(i * 4, (i * 4) + 4)]
+                keyMat.append(row)
+            return keyMat
+        else:
+            raise TypeError(f&#34;key must be a list of ints, got {type(key)}&#34;)
+
+    def listXOR(self, a: list, b: list) -&gt; list:
+        &#34;&#34;&#34;XOR of list of bits&#34;&#34;&#34;
+        # assume of same length
+        return [a[i] ^ b[i] for i in range(len(a))]
+
+    # will add 40 rows to keymat and then  transpose it so it&#39;s ready for encrypt/decrypt
+    def generateKeys(self, key: list) -&gt; list:
+        &#34;&#34;&#34;given a key, will generate future rounds keys&#34;&#34;&#34;
+        keyMat = self.generateKeyMat(key)
+        for n in range(4, 44):  # add 40 rows (should be 4,44)
+            a = keyMat[n - 4]
+            temp = keyMat
+            if n % 4 == 0:
+                temp2 = temp[n - 1]
+                b = self.keyTransform(temp2, n)
+            else:
+                b = keyMat[n - 1]
+            newRow = self.listXOR(a, b)
+            keyMat.append(newRow)
+        return keyMat
+
+    def generateRoundKey(self, key: list, round: int) -&gt; list:
+        &#34;&#34;&#34;Generate a rounds key based on the initial key&#34;&#34;&#34;
+        workingMat = key[4 * round : (4 * round) + 4]
+        # transpose?
+        return workingMat
+
+    # ************* encryption stuff ****************
+    def addRoundKey(self, m: list, key: list) -&gt; list:
+        &#34;&#34;&#34;adds this rounds key to working matrix&#34;&#34;&#34;
+        answer = []
+        for i in range(4):  # always 4?
+            temp = []
+            for j in range(4):
+                temp.append(m[i][j] ^ key[i][j])
+            answer.append(temp)
+        return answer
+
+    def mixCol(self, m: list) -&gt; list:
+        &#34;&#34;&#34;performs mix column method on working matrix&#34;&#34;&#34;
+        &#34;&#34;&#34;
+        one=GF2(1)
+        two=GF2(2)
+        three=GF2(3)
+        coefficient=[
+            [two, one,one,three],
+            [three, two, one, one],
+            [one, three, two, one],
+            [one, one, three, two]
+        ] #this is transposed because i do things with rows instead of columns
+        &#34;&#34;&#34;
+        coefficient = [
+            [2, 3, 1, 1],
+            [1, 2, 3, 1],
+            [1, 1, 2, 3],
+            [3, 1, 1, 2],
+        ]  # not transposed bc matmul will transpose state
+        # m=self.toGF(m)
+        # time to multiply
+        workingMat = self.GFmatMul(coefficient, m)
+        return workingMat
+
+    def shiftRow(self, m: list) -&gt; list:
+        &#34;&#34;&#34;shift matrix rows down&#34;&#34;&#34;
+        # this object internally refers to the matrices as the transpose of what they are conceptually
+        # to shit a row one must shift that column instead
+        temp = self.transposeMat(m)
+        for i in range(1, 4):  # skip first row
+            temp[i] = self.shiftLeft(temp[i], i)
+        # re transpose for future matrix stuff
+        workingMat = self.transposeMat(temp)
+        return workingMat
+
+    def byteSub(self, m: list) -&gt; list:
+        &#34;&#34;&#34;do...&#34;&#34;&#34;
+        for i in range(len(m)):
+            for j in range(len(m[i])):
+                x, y = self.byteToNibbles(m[i][j])
+                m[i][j] = self.sbox[x][y]
+        return m
+
+    def encrypt(self, pt: list, key: list, numrounds: int) -&gt; list:
+        &#34;&#34;&#34;perform encryption&#34;&#34;&#34;
+
+        &#34;&#34;&#34;
+        #if a string is passed preparation is needed
+        if isinstance(pt, str):
+            temp_prep = AES_PREP(PT=pt)
+            ptList=temp_prep.getPtList()
+            if isinstance(ptList[0], list):
+                #this means we have a list of lists and must encrypt for each list
+                for i in range(len(ptList)-1):
+                    #do all but the last one, which will be done here
+                    p=ptList.pop(0)
+                    self.encrypt(p, key, numrounds)
+                #now we set pt so we can use the last list given
+                pt=ptList.pop(0)
+            elif isinstance(ptList[0], int):
+                #this is what we want, now we can continue
+                pt=ptList.copy()
+            else:
+                raise TypeError(&#34;pt must be a string or list of bytes, please try again&#34;)
+        &#34;&#34;&#34;
+
+        # generate pt matrix for computations
+        ptMat = self.transposeMat(self.makeMat(pt))  # makeMat is formatted conceptually
+
+        # the key matrix is made in generate keys
+        extendedKeyMat = self.generateKeys(key)
+        # ARK on original key
+        k0 = self.generateRoundKey(extendedKeyMat, 0)
+        workingMat = self.addRoundKey(m=ptMat, key=k0)
+        if self.print:
+            self.console.log(&#34;pt mat&#34;)
+            self.printHexMatrix(ptMat)
+            self.console.log(&#34;key 0 &#34;)
+            self.printHexMatrix(k0)
+            self.console.log(&#34;result from initial ARK&#34;)
+            self.printHexMatrix(workingMat)
+        # n-1 rounds for 4 layers (BS, SR, MC, ARK) using round 1 to n-1 key
+        # round N: BS, SR, ARK using round N key
+        # 128 pt -&gt; 4X4 matrix, each element is a byte
+        for i in range(1, numrounds + 1):
+            byteSubResult = self.byteSub(workingMat)
+
+            shiftRowResult = self.shiftRow(byteSubResult)
+
+            mixColResult = self.mixCol(shiftRowResult)
+
+            roundKey = self.generateRoundKey(extendedKeyMat, i)
+            nextRoundMat = self.addRoundKey(mixColResult, key=roundKey)
+            if self.print:
+                self.console.log(&#34;round &#34;, i, &#34; key&#34;)
+                self.printHexMatrix(roundKey)
+                self.console.log(&#34;result from byteSub round &#34;, i)
+                self.printHexMatrix(byteSubResult)
+                self.console.log(&#34;result from shiftRow round &#34;, i)
+                self.printHexMatrix(shiftRowResult)
+                self.console.log(&#34;result from mixCol round &#34;, i)
+                self.printHexMatrix(mixColResult)
+                self.console.log(&#34;result from ARK round &#34;, i)
+                self.printHexMatrix(nextRoundMat)
+
+            workingMat = nextRoundMat
+        # this is for setting the ct string
+        temp = []
+        for row in workingMat:
+            temp += row
+        # make 2d into 1d
+        self._setCtString(temp)  # set ctString
+        return workingMat  # should first turn workingMat into a string?
+
+    def decrypt(self, ct: list, key: list, numrounds: int) -&gt; list:
+        &#34;&#34;&#34;perform decryption&#34;&#34;&#34;
+
+        &#34;&#34;&#34;
+        if isinstance(ct, str):
+            temp_prep = AES_PREP(CT=ct)
+            ctList=temp_prep.getCtList()
+            if isinstance(ctList[0], list):
+                #this means we have a list of lists and must encrypt for each list
+                for i in range(len(ctList)-1):
+                    #do all but the last one, which will be done here
+                    c=ctList.pop(0)
+                    self.decrypt(c, key, numrounds)
+                #now we set pt so we can use the last list given
+                ct=ctList.pop(0)
+            elif isinstance(ctList[0], int):
+                #this is what we want, now we can continue
+                ct=ctList.copy()
+            else:
+                raise TypeError(&#34;pt must be a string or list of bytes, please try again&#34;)
+        &#34;&#34;&#34;
+        # each layer is invertible
+        ctMat = self.transposeMat(self.makeMat(ct))  # makeMat is formatted conceptually
+        # we want the transpose of the conceptual ptMat
+
+        extendedKeyMat = self.generateKeys(key)
+
+        # ARK on original key
+        k0 = self.generateRoundKey(extendedKeyMat, numrounds)
+        # if 10 rounds we want the key from k40:k43
+
+        workingMat = self.addRoundKey(m=ctMat, key=k0)  # initial ARK
+        # add print check and statements here
+        if self.print:
+            self.console.log(&#34;ct mat&#34;)
+            self.printHexMatrix(ctMat)
+            self.console.log(&#34;key 0 &#34;)
+            self.printHexMatrix(k0)
+            self.console.log(&#34;result from initial ARK&#34;)
+            self.printHexMatrix(workingMat)
+        # first round will use key9 (k36:39)
+        for i in reversed(range(numrounds)):
+            if i &gt; 0 or numrounds == 1:
+                IMixColResult = self.mixColInv(workingMat)
+                workingMat = IMixColResult
+
+            IShiftRowResult = self.shiftRowInv(workingMat)
+
+            # then inverse bytesub
+            IByteSubResult = self.byteSubInv(IShiftRowResult)
+
+            # then add round key
+            roundKey = self.generateRoundKey(extendedKeyMat, i)
+            IARKresult = self.addRoundKey(IByteSubResult, roundKey)
+
+            workingMat = IARKresult
+
+            # add prints here
+            if self.print:
+                self.console.log(&#34;round &#34;, i, &#34; key&#34;)
+                self.printHexMatrix(roundKey)
+                if i &gt; 0 or numrounds == 1:
+                    self.console.log(&#34;result from mixCol round &#34;, i)
+                    self.printHexMatrix(IMixColResult)
+                self.console.log(&#34;result from inverse shiftRow round &#34;, i)
+                self.printHexMatrix(IShiftRowResult)
+                self.console.log(&#34;result from inverse byteSub round &#34;, i)
+                self.printHexMatrix(IByteSubResult)
+                self.console.log(&#34;result from ARK round &#34;, i)
+                self.printHexMatrix(IARKresult)
+
+        temp = []
+        for row in workingMat:
+            temp += row
+        # make 2d into 1d
+        self._setPtString(temp)  # set ctString
+        return workingMat
+
+    def __init__(self, printStuff: bool = False) -&gt; None:
+        # do something
+        self.console = Console()
+        self.print = printStuff
+        self.mod = 0b100011011
+
+        self.sbox = [
+            [
+                0x63,
+                0x7C,
+                0x77,
+                0x7B,
+                0xF2,
+                0x6B,
+                0x6F,
+                0xC5,
+                0x30,
+                0x01,
+                0x67,
+                0x2B,
+                0xFE,
+                0xD7,
+                0xAB,
+                0x76,
+            ],
+            [
+                0xCA,
+                0x82,
+                0xC9,
+                0x7D,
+                0xFA,
+                0x59,
+                0x47,
+                0xF0,
+                0xAD,
+                0xD4,
+                0xA2,
+                0xAF,
+                0x9C,
+                0xA4,
+                0x72,
+                0xC0,
+            ],
+            [
+                0xB7,
+                0xFD,
+                0x93,
+                0x26,
+                0x36,
+                0x3F,
+                0xF7,
+                0xCC,
+                0x34,
+                0xA5,
+                0xE5,
+                0xF1,
+                0x71,
+                0xD8,
+                0x31,
+                0x15,
+            ],
+            [
+                0x04,
+                0xC7,
+                0x23,
+                0xC3,
+                0x18,
+                0x96,
+                0x05,
+                0x9A,
+                0x07,
+                0x12,
+                0x80,
+                0xE2,
+                0xEB,
+                0x27,
+                0xB2,
+                0x75,
+            ],
+            [
+                0x09,
+                0x83,
+                0x2C,
+                0x1A,
+                0x1B,
+                0x6E,
+                0x5A,
+                0xA0,
+                0x52,
+                0x3B,
+                0xD6,
+                0xB3,
+                0x29,
+                0xE3,
+                0x2F,
+                0x84,
+            ],
+            [
+                0x53,
+                0xD1,
+                0x00,
+                0xED,
+                0x20,
+                0xFC,
+                0xB1,
+                0x5B,
+                0x6A,
+                0xCB,
+                0xBE,
+                0x39,
+                0x4A,
+                0x4C,
+                0x58,
+                0xCF,
+            ],
+            [
+                0xD0,
+                0xEF,
+                0xAA,
+                0xFB,
+                0x43,
+                0x4D,
+                0x33,
+                0x85,
+                0x45,
+                0xF9,
+                0x02,
+                0x7F,
+                0x50,
+                0x3C,
+                0x9F,
+                0xA8,
+            ],
+            [
+                0x51,
+                0xA3,
+                0x40,
+                0x8F,
+                0x92,
+                0x9D,
+                0x38,
+                0xF5,
+                0xBC,
+                0xB6,
+                0xDA,
+                0x21,
+                0x10,
+                0xFF,
+                0xF3,
+                0xD2,
+            ],
+            [
+                0xCD,
+                0x0C,
+                0x13,
+                0xEC,
+                0x5F,
+                0x97,
+                0x44,
+                0x17,
+                0xC4,
+                0xA7,
+                0x7E,
+                0x3D,
+                0x64,
+                0x5D,
+                0x19,
+                0x73,
+            ],
+            [
+                0x60,
+                0x81,
+                0x4F,
+                0xDC,
+                0x22,
+                0x2A,
+                0x90,
+                0x88,
+                0x46,
+                0xEE,
+                0xB8,
+                0x14,
+                0xDE,
+                0x5E,
+                0x0B,
+                0xDB,
+            ],
+            [
+                0xE0,
+                0x32,
+                0x3A,
+                0x0A,
+                0x49,
+                0x06,
+                0x24,
+                0x5C,
+                0xC2,
+                0xD3,
+                0xAC,
+                0x62,
+                0x91,
+                0x95,
+                0xE4,
+                0x79,
+            ],
+            [
+                0xE7,
+                0xC8,
+                0x37,
+                0x6D,
+                0x8D,
+                0xD5,
+                0x4E,
+                0xA9,
+                0x6C,
+                0x56,
+                0xF4,
+                0xEA,
+                0x65,
+                0x7A,
+                0xAE,
+                0x08,
+            ],
+            [
+                0xBA,
+                0x78,
+                0x25,
+                0x2E,
+                0x1C,
+                0xA6,
+                0xB4,
+                0xC6,
+                0xE8,
+                0xDD,
+                0x74,
+                0x1F,
+                0x4B,
+                0xBD,
+                0x8B,
+                0x8A,
+            ],
+            [
+                0x70,
+                0x3E,
+                0xB5,
+                0x66,
+                0x48,
+                0x03,
+                0xF6,
+                0x0E,
+                0x61,
+                0x35,
+                0x57,
+                0xB9,
+                0x86,
+                0xC1,
+                0x1D,
+                0x9E,
+            ],
+            [
+                0xE1,
+                0xF8,
+                0x98,
+                0x11,
+                0x69,
+                0xD9,
+                0x8E,
+                0x94,
+                0x9B,
+                0x1E,
+                0x87,
+                0xE9,
+                0xCE,
+                0x55,
+                0x28,
+                0xDF,
+            ],
+            [
+                0x8C,
+                0xA1,
+                0x89,
+                0x0D,
+                0xBF,
+                0xE6,
+                0x42,
+                0x68,
+                0x41,
+                0x99,
+                0x2D,
+                0x0F,
+                0xB0,
+                0x54,
+                0xBB,
+                0x16,
+            ],
+        ]
+        self.sboxINV = [
+            [
+                0x52,
+                0x09,
+                0x6A,
+                0xD5,
+                0x30,
+                0x36,
+                0xA5,
+                0x38,
+                0xBF,
+                0x40,
+                0xA3,
+                0x9E,
+                0x81,
+                0xF3,
+                0xD7,
+                0xFB,
+            ],
+            [
+                0x7C,
+                0xE3,
+                0x39,
+                0x82,
+                0x9B,
+                0x2F,
+                0xFF,
+                0x87,
+                0x34,
+                0x8E,
+                0x43,
+                0x44,
+                0xC4,
+                0xDE,
+                0xE9,
+                0xCB,
+            ],
+            [
+                0x54,
+                0x7B,
+                0x94,
+                0x32,
+                0xA6,
+                0xC2,
+                0x23,
+                0x3D,
+                0xEE,
+                0x4C,
+                0x95,
+                0x0B,
+                0x42,
+                0xFA,
+                0xC3,
+                0x4E,
+            ],
+            [
+                0x08,
+                0x2E,
+                0xA1,
+                0x66,
+                0x28,
+                0xD9,
+                0x24,
+                0xB2,
+                0x76,
+                0x5B,
+                0xA2,
+                0x49,
+                0x6D,
+                0x8B,
+                0xD1,
+                0x25,
+            ],
+            [
+                0x72,
+                0xF8,
+                0xF6,
+                0x64,
+                0x86,
+                0x68,
+                0x98,
+                0x16,
+                0xD4,
+                0xA4,
+                0x5C,
+                0xCC,
+                0x5D,
+                0x65,
+                0xB6,
+                0x92,
+            ],
+            [
+                0x6C,
+                0x70,
+                0x48,
+                0x50,
+                0xFD,
+                0xED,
+                0xB9,
+                0xDA,
+                0x5E,
+                0x15,
+                0x46,
+                0x57,
+                0xA7,
+                0x8D,
+                0x9D,
+                0x84,
+            ],
+            [
+                0x90,
+                0xD8,
+                0xAB,
+                0x00,
+                0x8C,
+                0xBC,
+                0xD3,
+                0x0A,
+                0xF7,
+                0xE4,
+                0x58,
+                0x05,
+                0xB8,
+                0xB3,
+                0x45,
+                0x06,
+            ],
+            [
+                0xD0,
+                0x2C,
+                0x1E,
+                0x8F,
+                0xCA,
+                0x3F,
+                0x0F,
+                0x02,
+                0xC1,
+                0xAF,
+                0xBD,
+                0x03,
+                0x01,
+                0x13,
+                0x8A,
+                0x6B,
+            ],
+            [
+                0x3A,
+                0x91,
+                0x11,
+                0x41,
+                0x4F,
+                0x67,
+                0xDC,
+                0xEA,
+                0x97,
+                0xF2,
+                0xCF,
+                0xCE,
+                0xF0,
+                0xB4,
+                0xE6,
+                0x73,
+            ],
+            [
+                0x96,
+                0xAC,
+                0x74,
+                0x22,
+                0xE7,
+                0xAD,
+                0x35,
+                0x85,
+                0xE2,
+                0xF9,
+                0x37,
+                0xE8,
+                0x1C,
+                0x75,
+                0xDF,
+                0x6E,
+            ],
+            [
+                0x47,
+                0xF1,
+                0x1A,
+                0x71,
+                0x1D,
+                0x29,
+                0xC5,
+                0x89,
+                0x6F,
+                0xB7,
+                0x62,
+                0x0E,
+                0xAA,
+                0x18,
+                0xBE,
+                0x1B,
+            ],
+            [
+                0xFC,
+                0x56,
+                0x3E,
+                0x4B,
+                0xC6,
+                0xD2,
+                0x79,
+                0x20,
+                0x9A,
+                0xDB,
+                0xC0,
+                0xFE,
+                0x78,
+                0xCD,
+                0x5A,
+                0xF4,
+            ],
+            [
+                0x1F,
+                0xDD,
+                0xA8,
+                0x33,
+                0x88,
+                0x07,
+                0xC7,
+                0x31,
+                0xB1,
+                0x12,
+                0x10,
+                0x59,
+                0x27,
+                0x80,
+                0xEC,
+                0x5F,
+            ],
+            [
+                0x60,
+                0x51,
+                0x7F,
+                0xA9,
+                0x19,
+                0xB5,
+                0x4A,
+                0x0D,
+                0x2D,
+                0xE5,
+                0x7A,
+                0x9F,
+                0x93,
+                0xC9,
+                0x9C,
+                0xEF,
+            ],
+            [
+                0xA0,
+                0xE0,
+                0x3B,
+                0x4D,
+                0xAE,
+                0x2A,
+                0xF5,
+                0xB0,
+                0xC8,
+                0xEB,
+                0xBB,
+                0x3C,
+                0x83,
+                0x53,
+                0x99,
+                0x61,
+            ],
+            [
+                0x17,
+                0x2B,
+                0x04,
+                0x7E,
+                0xBA,
+                0x77,
+                0xD6,
+                0x26,
+                0xE1,
+                0x69,
+                0x14,
+                0x63,
+                0x55,
+                0x21,
+                0x0C,
+                0x7D,
+            ],
+        ]
+
+        self.ctString = &#34;&#34;
+        self.ctStrings: list = []
+        self.ptString = &#34;&#34;
+        self.ptStrings: list = []
+
+    # *****************  data manip stuff ******************
+
+    def GFdot(self, a: list, b: list) -&gt; int:
+        &#34;&#34;&#34;perform dot product on binary galois field objects&#34;&#34;&#34;
+        # something wrong with logic above
+        m = GF2(self.mod)
+        first = GF2(GF2(a[0]) * GF2(b[0])) % m
+        sec = GF2(GF2(a[1]) * GF2(b[1])) % m
+        third = GF2(GF2(a[2]) * GF2(b[2])) % m
+        fourth = GF2(GF2(a[3]) * GF2(b[3])) % m
+        temp = [first, sec, third, fourth]
+        answer = 0
+        for i in temp:
+            answer = answer ^ i
+        return answer
+
+    def getCol(self, m: list, c: int) -&gt; list:
+        &#34;&#34;&#34;get a column from the matrix as a list&#34;&#34;&#34;
+        # return column c of matrix m (list)
+        return [r[c] for r in m]
+
+    def GFmatMul(self, a: list, b: list) -&gt; list:
+        &#34;&#34;&#34;perform matrix multiplication on matrices with GF2 elements&#34;&#34;&#34;
+        workingMat = []  # answer(i,j)=a[i] dot b[][j]
+        b = self.transposeMat(b)
+        for i in range(len(a)):  # for each row in a
+            temp = []
+            for j in range(len(b[0])):  # for each col in b
+                # append to temp the product of a[i] and col j in b
+                temp.append(self.GFdot(a[i], self.getCol(b, j)))
+            workingMat.append(temp)
+        workingMat = self.transposeMat(workingMat)
+        return workingMat
+
+    def byteToNibbles(self, byte: int) -&gt; tuple:
+        &#34;&#34;&#34;breaks a byte into a tuple of nibbles&#34;&#34;&#34;
+        s = hex(byte)[2:]  # get rid of 0x
+        while len(s) &lt; 2:
+            s = &#34;0&#34; + s
+        return int(s[0], 16), int(s[1], 16)
+
+    def shiftLeft(self, r: list, n: int) -&gt; list:
+        &#34;&#34;&#34;given a list and number of shifts, performs shifts and returns new list&#34;&#34;&#34;
+        # shifts row r left n bits
+        for i in range(n):
+            temp = r.pop(0)
+            r.append(temp)
+        return r
+
+    def shiftRight(self, r: list, n: int) -&gt; list:
+        &#34;&#34;&#34;given list and number of shifts, perform shifts and return new list&#34;&#34;&#34;
+        # shifts row r right n bits
+        for i in range(n):
+            temp = r.pop(-1)
+            r.insert(0, temp)
+        return r
+
+    def transposeMat(self, m: list) -&gt; list:
+        &#34;&#34;&#34;given a matrix, returns that matrix transposed&#34;&#34;&#34;
+
+        workingMat = m.copy()
+        workingMat = list(zip(*workingMat))  # this is now a list of tuples
+        for i in range(len(workingMat)):
+            workingMat[i] = list(
+                workingMat[i]
+            )  # turn tuples to list so its a proper matrix
+        return workingMat
+
+    def printHexMatrix(self, t: list) -&gt; None:
+        m = self.transposeMat(t)
+        s = &#34;&#34;
+        for r in m:
+            for e in r:
+                temp = hex(e)[2:] + &#34; &#34;
+                if len(temp) == 2:
+                    temp = &#34;0&#34; + temp
+                s += temp
+            s += &#34;\n&#34;
+        self.console.log(s)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="myAES.AES.AES.GFdot"><code class="name flex">
+<span>def <span class="ident">GFdot</span></span>(<span>self, a: list, b: list) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><p>perform dot product on binary galois field objects</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def GFdot(self, a: list, b: list) -&gt; int:
+    &#34;&#34;&#34;perform dot product on binary galois field objects&#34;&#34;&#34;
+    # something wrong with logic above
+    m = GF2(self.mod)
+    first = GF2(GF2(a[0]) * GF2(b[0])) % m
+    sec = GF2(GF2(a[1]) * GF2(b[1])) % m
+    third = GF2(GF2(a[2]) * GF2(b[2])) % m
+    fourth = GF2(GF2(a[3]) * GF2(b[3])) % m
+    temp = [first, sec, third, fourth]
+    answer = 0
+    for i in temp:
+        answer = answer ^ i
+    return answer</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.GFmatMul"><code class="name flex">
+<span>def <span class="ident">GFmatMul</span></span>(<span>self, a: list, b: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>perform matrix multiplication on matrices with GF2 elements</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def GFmatMul(self, a: list, b: list) -&gt; list:
+    &#34;&#34;&#34;perform matrix multiplication on matrices with GF2 elements&#34;&#34;&#34;
+    workingMat = []  # answer(i,j)=a[i] dot b[][j]
+    b = self.transposeMat(b)
+    for i in range(len(a)):  # for each row in a
+        temp = []
+        for j in range(len(b[0])):  # for each col in b
+            # append to temp the product of a[i] and col j in b
+            temp.append(self.GFdot(a[i], self.getCol(b, j)))
+        workingMat.append(temp)
+    workingMat = self.transposeMat(workingMat)
+    return workingMat</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.addRoundKey"><code class="name flex">
+<span>def <span class="ident">addRoundKey</span></span>(<span>self, m: list, key: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>adds this rounds key to working matrix</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def addRoundKey(self, m: list, key: list) -&gt; list:
+    &#34;&#34;&#34;adds this rounds key to working matrix&#34;&#34;&#34;
+    answer = []
+    for i in range(4):  # always 4?
+        temp = []
+        for j in range(4):
+            temp.append(m[i][j] ^ key[i][j])
+        answer.append(temp)
+    return answer</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.byteSub"><code class="name flex">
+<span>def <span class="ident">byteSub</span></span>(<span>self, m: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>do&hellip;</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def byteSub(self, m: list) -&gt; list:
+    &#34;&#34;&#34;do...&#34;&#34;&#34;
+    for i in range(len(m)):
+        for j in range(len(m[i])):
+            x, y = self.byteToNibbles(m[i][j])
+            m[i][j] = self.sbox[x][y]
+    return m</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.byteSubInv"><code class="name flex">
+<span>def <span class="ident">byteSubInv</span></span>(<span>self, m: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Given a matrix, do&hellip;</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def byteSubInv(self, m: list) -&gt; list:
+    &#34;&#34;&#34;Given a matrix, do...&#34;&#34;&#34;
+    for i in range(len(m)):
+        for j in range(len(m[i])):
+            x, y = self.byteToNibbles(m[i][j])
+            m[i][j] = self.sboxINV[x][y]
+    return m</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.byteToNibbles"><code class="name flex">
+<span>def <span class="ident">byteToNibbles</span></span>(<span>self, byte: int) ‑> tuple</span>
+</code></dt>
+<dd>
+<div class="desc"><p>breaks a byte into a tuple of nibbles</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def byteToNibbles(self, byte: int) -&gt; tuple:
+    &#34;&#34;&#34;breaks a byte into a tuple of nibbles&#34;&#34;&#34;
+    s = hex(byte)[2:]  # get rid of 0x
+    while len(s) &lt; 2:
+        s = &#34;0&#34; + s
+    return int(s[0], 16), int(s[1], 16)</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.decrypt"><code class="name flex">
+<span>def <span class="ident">decrypt</span></span>(<span>self, ct: list, key: list, numrounds: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>perform decryption</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def decrypt(self, ct: list, key: list, numrounds: int) -&gt; list:
+    &#34;&#34;&#34;perform decryption&#34;&#34;&#34;
+
+    &#34;&#34;&#34;
+    if isinstance(ct, str):
+        temp_prep = AES_PREP(CT=ct)
+        ctList=temp_prep.getCtList()
+        if isinstance(ctList[0], list):
+            #this means we have a list of lists and must encrypt for each list
+            for i in range(len(ctList)-1):
+                #do all but the last one, which will be done here
+                c=ctList.pop(0)
+                self.decrypt(c, key, numrounds)
+            #now we set pt so we can use the last list given
+            ct=ctList.pop(0)
+        elif isinstance(ctList[0], int):
+            #this is what we want, now we can continue
+            ct=ctList.copy()
+        else:
+            raise TypeError(&#34;pt must be a string or list of bytes, please try again&#34;)
+    &#34;&#34;&#34;
+    # each layer is invertible
+    ctMat = self.transposeMat(self.makeMat(ct))  # makeMat is formatted conceptually
+    # we want the transpose of the conceptual ptMat
+
+    extendedKeyMat = self.generateKeys(key)
+
+    # ARK on original key
+    k0 = self.generateRoundKey(extendedKeyMat, numrounds)
+    # if 10 rounds we want the key from k40:k43
+
+    workingMat = self.addRoundKey(m=ctMat, key=k0)  # initial ARK
+    # add print check and statements here
+    if self.print:
+        self.console.log(&#34;ct mat&#34;)
+        self.printHexMatrix(ctMat)
+        self.console.log(&#34;key 0 &#34;)
+        self.printHexMatrix(k0)
+        self.console.log(&#34;result from initial ARK&#34;)
+        self.printHexMatrix(workingMat)
+    # first round will use key9 (k36:39)
+    for i in reversed(range(numrounds)):
+        if i &gt; 0 or numrounds == 1:
+            IMixColResult = self.mixColInv(workingMat)
+            workingMat = IMixColResult
+
+        IShiftRowResult = self.shiftRowInv(workingMat)
+
+        # then inverse bytesub
+        IByteSubResult = self.byteSubInv(IShiftRowResult)
+
+        # then add round key
+        roundKey = self.generateRoundKey(extendedKeyMat, i)
+        IARKresult = self.addRoundKey(IByteSubResult, roundKey)
+
+        workingMat = IARKresult
+
+        # add prints here
+        if self.print:
+            self.console.log(&#34;round &#34;, i, &#34; key&#34;)
+            self.printHexMatrix(roundKey)
+            if i &gt; 0 or numrounds == 1:
+                self.console.log(&#34;result from mixCol round &#34;, i)
+                self.printHexMatrix(IMixColResult)
+            self.console.log(&#34;result from inverse shiftRow round &#34;, i)
+            self.printHexMatrix(IShiftRowResult)
+            self.console.log(&#34;result from inverse byteSub round &#34;, i)
+            self.printHexMatrix(IByteSubResult)
+            self.console.log(&#34;result from ARK round &#34;, i)
+            self.printHexMatrix(IARKresult)
+
+    temp = []
+    for row in workingMat:
+        temp += row
+    # make 2d into 1d
+    self._setPtString(temp)  # set ctString
+    return workingMat</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.encrypt"><code class="name flex">
+<span>def <span class="ident">encrypt</span></span>(<span>self, pt: list, key: list, numrounds: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>perform encryption</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def encrypt(self, pt: list, key: list, numrounds: int) -&gt; list:
+    &#34;&#34;&#34;perform encryption&#34;&#34;&#34;
+
+    &#34;&#34;&#34;
+    #if a string is passed preparation is needed
+    if isinstance(pt, str):
+        temp_prep = AES_PREP(PT=pt)
+        ptList=temp_prep.getPtList()
+        if isinstance(ptList[0], list):
+            #this means we have a list of lists and must encrypt for each list
+            for i in range(len(ptList)-1):
+                #do all but the last one, which will be done here
+                p=ptList.pop(0)
+                self.encrypt(p, key, numrounds)
+            #now we set pt so we can use the last list given
+            pt=ptList.pop(0)
+        elif isinstance(ptList[0], int):
+            #this is what we want, now we can continue
+            pt=ptList.copy()
+        else:
+            raise TypeError(&#34;pt must be a string or list of bytes, please try again&#34;)
+    &#34;&#34;&#34;
+
+    # generate pt matrix for computations
+    ptMat = self.transposeMat(self.makeMat(pt))  # makeMat is formatted conceptually
+
+    # the key matrix is made in generate keys
+    extendedKeyMat = self.generateKeys(key)
+    # ARK on original key
+    k0 = self.generateRoundKey(extendedKeyMat, 0)
+    workingMat = self.addRoundKey(m=ptMat, key=k0)
+    if self.print:
+        self.console.log(&#34;pt mat&#34;)
+        self.printHexMatrix(ptMat)
+        self.console.log(&#34;key 0 &#34;)
+        self.printHexMatrix(k0)
+        self.console.log(&#34;result from initial ARK&#34;)
+        self.printHexMatrix(workingMat)
+    # n-1 rounds for 4 layers (BS, SR, MC, ARK) using round 1 to n-1 key
+    # round N: BS, SR, ARK using round N key
+    # 128 pt -&gt; 4X4 matrix, each element is a byte
+    for i in range(1, numrounds + 1):
+        byteSubResult = self.byteSub(workingMat)
+
+        shiftRowResult = self.shiftRow(byteSubResult)
+
+        mixColResult = self.mixCol(shiftRowResult)
+
+        roundKey = self.generateRoundKey(extendedKeyMat, i)
+        nextRoundMat = self.addRoundKey(mixColResult, key=roundKey)
+        if self.print:
+            self.console.log(&#34;round &#34;, i, &#34; key&#34;)
+            self.printHexMatrix(roundKey)
+            self.console.log(&#34;result from byteSub round &#34;, i)
+            self.printHexMatrix(byteSubResult)
+            self.console.log(&#34;result from shiftRow round &#34;, i)
+            self.printHexMatrix(shiftRowResult)
+            self.console.log(&#34;result from mixCol round &#34;, i)
+            self.printHexMatrix(mixColResult)
+            self.console.log(&#34;result from ARK round &#34;, i)
+            self.printHexMatrix(nextRoundMat)
+
+        workingMat = nextRoundMat
+    # this is for setting the ct string
+    temp = []
+    for row in workingMat:
+        temp += row
+    # make 2d into 1d
+    self._setCtString(temp)  # set ctString
+    return workingMat  # should first turn workingMat into a string?</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.generateKeyMat"><code class="name flex">
+<span>def <span class="ident">generateKeyMat</span></span>(<span>self, key: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>given a key, will generate a matrix for AES</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generateKeyMat(self, key: list) -&gt; list:
+    &#34;&#34;&#34;given a key, will generate a matrix for AES&#34;&#34;&#34;
+    if isinstance(key, list):
+        keyMat = []
+        for i in range(4):
+            row = [key[i] for i in range(i * 4, (i * 4) + 4)]
+            keyMat.append(row)
+        return keyMat
+    else:
+        raise TypeError(f&#34;key must be a list of ints, got {type(key)}&#34;)</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.generateKeys"><code class="name flex">
+<span>def <span class="ident">generateKeys</span></span>(<span>self, key: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>given a key, will generate future rounds keys</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generateKeys(self, key: list) -&gt; list:
+    &#34;&#34;&#34;given a key, will generate future rounds keys&#34;&#34;&#34;
+    keyMat = self.generateKeyMat(key)
+    for n in range(4, 44):  # add 40 rows (should be 4,44)
+        a = keyMat[n - 4]
+        temp = keyMat
+        if n % 4 == 0:
+            temp2 = temp[n - 1]
+            b = self.keyTransform(temp2, n)
+        else:
+            b = keyMat[n - 1]
+        newRow = self.listXOR(a, b)
+        keyMat.append(newRow)
+    return keyMat</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.generateRoundKey"><code class="name flex">
+<span>def <span class="ident">generateRoundKey</span></span>(<span>self, key: list, round: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate a rounds key based on the initial key</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generateRoundKey(self, key: list, round: int) -&gt; list:
+    &#34;&#34;&#34;Generate a rounds key based on the initial key&#34;&#34;&#34;
+    workingMat = key[4 * round : (4 * round) + 4]
+    # transpose?
+    return workingMat</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.getCol"><code class="name flex">
+<span>def <span class="ident">getCol</span></span>(<span>self, m: list, c: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>get a column from the matrix as a list</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getCol(self, m: list, c: int) -&gt; list:
+    &#34;&#34;&#34;get a column from the matrix as a list&#34;&#34;&#34;
+    # return column c of matrix m (list)
+    return [r[c] for r in m]</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.getCtString"><code class="name flex">
+<span>def <span class="ident">getCtString</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get cipher text string</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getCtString(self) -&gt; str:
+    &#34;&#34;&#34;Get cipher text string&#34;&#34;&#34;
+    strLength = len(self.ctStrings)
+    if strLength == 0:
+        raise ValueError(&#34;no ct string was made, please try again&#34;)
+    elif strLength == 1:
+        return self.ctString
+    else:
+        ctStr = &#34;&#34;
+        for char in self.ctStrings:
+            ctStr += char
+        return ctStr</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.getPtString"><code class="name flex">
+<span>def <span class="ident">getPtString</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get plain text string</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getPtString(self) -&gt; str:
+    &#34;&#34;&#34;Get plain text string&#34;&#34;&#34;
+    ptLenth = len(self.ptStrings)
+    if ptLenth == 0:
+        raise ValueError(&#34;no pt string was made, please try again&#34;)
+    elif ptLenth == 1:
+        return self.ptString
+    else:
+        s = &#34;&#34;
+        for e in self.ptStrings:
+            s += e
+        return s</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.keyTransform"><code class="name flex">
+<span>def <span class="ident">keyTransform</span></span>(<span>self, k: list, n: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>will take a 1d list, left shift it, apply sbox to it</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def keyTransform(self, k: list, n: int) -&gt; list:
+    &#34;&#34;&#34;will take a 1d list, left shift it, apply sbox to it&#34;&#34;&#34;
+    # n = the row being made
+    # only called if n%4=0 so no check needed
+    t = []
+    for ele in k:  # needed for dereferencing
+        t.append(ele)
+    t = self.shiftLeft(t, 1)
+    for i in range(len(t)):
+        a, b = self.byteToNibbles(t[i])
+        t[i] = self.sbox[a][b]
+
+    # and then the first element is XOR&#39;d with 2^((n-4)/4)
+    temp = t[0] ^ (2 ** int(((n - 4) / 4)))
+    # check if out of bounds of a single byte
+    # if it is out of bounds do i multiply mod by 0b100000000 or do i mod by GF2(8) reduction polynomial?
+    t[0] = temp
+    return t</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.listXOR"><code class="name flex">
+<span>def <span class="ident">listXOR</span></span>(<span>self, a: list, b: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>XOR of list of bits</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def listXOR(self, a: list, b: list) -&gt; list:
+    &#34;&#34;&#34;XOR of list of bits&#34;&#34;&#34;
+    # assume of same length
+    return [a[i] ^ b[i] for i in range(len(a))]</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.makeMat"><code class="name flex">
+<span>def <span class="ident">makeMat</span></span>(<span>self, pt: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Make a 2d list based off of the bits of the plain text given</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def makeMat(self, pt: list) -&gt; list:
+    &#34;&#34;&#34;Make a 2d list based off of the bits of the plain text given&#34;&#34;&#34;
+    # assume pt is a list of bytes
+    ptMat = []
+    for i in range(4):
+        temp = []
+        for j in range(4):
+            temp.append(pt[i + (4 * j)])
+        ptMat.append(temp)
+    return ptMat</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.mixCol"><code class="name flex">
+<span>def <span class="ident">mixCol</span></span>(<span>self, m: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>performs mix column method on working matrix</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def mixCol(self, m: list) -&gt; list:
+    &#34;&#34;&#34;performs mix column method on working matrix&#34;&#34;&#34;
+    &#34;&#34;&#34;
+    one=GF2(1)
+    two=GF2(2)
+    three=GF2(3)
+    coefficient=[
+        [two, one,one,three],
+        [three, two, one, one],
+        [one, three, two, one],
+        [one, one, three, two]
+    ] #this is transposed because i do things with rows instead of columns
+    &#34;&#34;&#34;
+    coefficient = [
+        [2, 3, 1, 1],
+        [1, 2, 3, 1],
+        [1, 1, 2, 3],
+        [3, 1, 1, 2],
+    ]  # not transposed bc matmul will transpose state
+    # m=self.toGF(m)
+    # time to multiply
+    workingMat = self.GFmatMul(coefficient, m)
+    return workingMat</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.mixColInv"><code class="name flex">
+<span>def <span class="ident">mixColInv</span></span>(<span>self, m: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>given a matrix, perform inverse GF matrix multiplication</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def mixColInv(self, m: list) -&gt; list:
+    &#34;&#34;&#34;given a matrix, perform inverse GF matrix multiplication&#34;&#34;&#34;
+    &#34;&#34;&#34;
+    coefficient = [
+        [GF2(0x0e), GF2(0x0b), GF2(0x0d), GF2(0x09)],
+        [GF2(0x09), GF2(0x0e), GF2(0x0b), GF2(0x0d)],
+        [GF2(0x0d), GF2(0x09), GF2(0x0e), GF2(0x0b)],
+        [GF2(0x0b), GF2(0x0d), GF2(0x09), GF2(0x0e)]
+    ]
+    &#34;&#34;&#34;
+    coefficient = [
+        [14, 11, 13, 9],
+        [9, 14, 11, 13],
+        [13, 9, 14, 11],
+        [11, 13, 9, 14],
+    ]
+    workingMat = self.GFmatMul(coefficient, m)
+    return workingMat</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.printHexMatrix"><code class="name flex">
+<span>def <span class="ident">printHexMatrix</span></span>(<span>self, t: list) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def printHexMatrix(self, t: list) -&gt; None:
+    m = self.transposeMat(t)
+    s = &#34;&#34;
+    for r in m:
+        for e in r:
+            temp = hex(e)[2:] + &#34; &#34;
+            if len(temp) == 2:
+                temp = &#34;0&#34; + temp
+            s += temp
+        s += &#34;\n&#34;
+    self.console.log(s)</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.shiftLeft"><code class="name flex">
+<span>def <span class="ident">shiftLeft</span></span>(<span>self, r: list, n: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>given a list and number of shifts, performs shifts and returns new list</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def shiftLeft(self, r: list, n: int) -&gt; list:
+    &#34;&#34;&#34;given a list and number of shifts, performs shifts and returns new list&#34;&#34;&#34;
+    # shifts row r left n bits
+    for i in range(n):
+        temp = r.pop(0)
+        r.append(temp)
+    return r</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.shiftRight"><code class="name flex">
+<span>def <span class="ident">shiftRight</span></span>(<span>self, r: list, n: int) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>given list and number of shifts, perform shifts and return new list</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def shiftRight(self, r: list, n: int) -&gt; list:
+    &#34;&#34;&#34;given list and number of shifts, perform shifts and return new list&#34;&#34;&#34;
+    # shifts row r right n bits
+    for i in range(n):
+        temp = r.pop(-1)
+        r.insert(0, temp)
+    return r</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.shiftRow"><code class="name flex">
+<span>def <span class="ident">shiftRow</span></span>(<span>self, m: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>shift matrix rows down</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def shiftRow(self, m: list) -&gt; list:
+    &#34;&#34;&#34;shift matrix rows down&#34;&#34;&#34;
+    # this object internally refers to the matrices as the transpose of what they are conceptually
+    # to shit a row one must shift that column instead
+    temp = self.transposeMat(m)
+    for i in range(1, 4):  # skip first row
+        temp[i] = self.shiftLeft(temp[i], i)
+    # re transpose for future matrix stuff
+    workingMat = self.transposeMat(temp)
+    return workingMat</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.shiftRowInv"><code class="name flex">
+<span>def <span class="ident">shiftRowInv</span></span>(<span>self, m: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Given a matrix, shift rows up</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def shiftRowInv(self, m: list) -&gt; list:
+    &#34;&#34;&#34;Given a matrix, shift rows up&#34;&#34;&#34;
+    # first row not effected
+    transposedMat = self.transposeMat(m)
+    for i in range(1, 4):  # skip first row
+        transposedMat[i] = self.shiftRight(transposedMat[i], i)
+    # re transpose for future matrix stuff
+    workingMat = self.transposeMat(transposedMat)
+    return workingMat</code></pre>
+</details>
+</dd>
+<dt id="myAES.AES.AES.transposeMat"><code class="name flex">
+<span>def <span class="ident">transposeMat</span></span>(<span>self, m: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>given a matrix, returns that matrix transposed</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def transposeMat(self, m: list) -&gt; list:
+    &#34;&#34;&#34;given a matrix, returns that matrix transposed&#34;&#34;&#34;
+
+    workingMat = m.copy()
+    workingMat = list(zip(*workingMat))  # this is now a list of tuples
+    for i in range(len(workingMat)):
+        workingMat[i] = list(
+            workingMat[i]
+        )  # turn tuples to list so its a proper matrix
+    return workingMat</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="myAES" href="index.html">myAES</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="myAES.AES.AES" href="#myAES.AES.AES">AES</a></code></h4>
+<ul class="two-column">
+<li><code><a title="myAES.AES.AES.GFdot" href="#myAES.AES.AES.GFdot">GFdot</a></code></li>
+<li><code><a title="myAES.AES.AES.GFmatMul" href="#myAES.AES.AES.GFmatMul">GFmatMul</a></code></li>
+<li><code><a title="myAES.AES.AES.addRoundKey" href="#myAES.AES.AES.addRoundKey">addRoundKey</a></code></li>
+<li><code><a title="myAES.AES.AES.byteSub" href="#myAES.AES.AES.byteSub">byteSub</a></code></li>
+<li><code><a title="myAES.AES.AES.byteSubInv" href="#myAES.AES.AES.byteSubInv">byteSubInv</a></code></li>
+<li><code><a title="myAES.AES.AES.byteToNibbles" href="#myAES.AES.AES.byteToNibbles">byteToNibbles</a></code></li>
+<li><code><a title="myAES.AES.AES.decrypt" href="#myAES.AES.AES.decrypt">decrypt</a></code></li>
+<li><code><a title="myAES.AES.AES.encrypt" href="#myAES.AES.AES.encrypt">encrypt</a></code></li>
+<li><code><a title="myAES.AES.AES.generateKeyMat" href="#myAES.AES.AES.generateKeyMat">generateKeyMat</a></code></li>
+<li><code><a title="myAES.AES.AES.generateKeys" href="#myAES.AES.AES.generateKeys">generateKeys</a></code></li>
+<li><code><a title="myAES.AES.AES.generateRoundKey" href="#myAES.AES.AES.generateRoundKey">generateRoundKey</a></code></li>
+<li><code><a title="myAES.AES.AES.getCol" href="#myAES.AES.AES.getCol">getCol</a></code></li>
+<li><code><a title="myAES.AES.AES.getCtString" href="#myAES.AES.AES.getCtString">getCtString</a></code></li>
+<li><code><a title="myAES.AES.AES.getPtString" href="#myAES.AES.AES.getPtString">getPtString</a></code></li>
+<li><code><a title="myAES.AES.AES.keyTransform" href="#myAES.AES.AES.keyTransform">keyTransform</a></code></li>
+<li><code><a title="myAES.AES.AES.listXOR" href="#myAES.AES.AES.listXOR">listXOR</a></code></li>
+<li><code><a title="myAES.AES.AES.makeMat" href="#myAES.AES.AES.makeMat">makeMat</a></code></li>
+<li><code><a title="myAES.AES.AES.mixCol" href="#myAES.AES.AES.mixCol">mixCol</a></code></li>
+<li><code><a title="myAES.AES.AES.mixColInv" href="#myAES.AES.AES.mixColInv">mixColInv</a></code></li>
+<li><code><a title="myAES.AES.AES.printHexMatrix" href="#myAES.AES.AES.printHexMatrix">printHexMatrix</a></code></li>
+<li><code><a title="myAES.AES.AES.shiftLeft" href="#myAES.AES.AES.shiftLeft">shiftLeft</a></code></li>
+<li><code><a title="myAES.AES.AES.shiftRight" href="#myAES.AES.AES.shiftRight">shiftRight</a></code></li>
+<li><code><a title="myAES.AES.AES.shiftRow" href="#myAES.AES.AES.shiftRow">shiftRow</a></code></li>
+<li><code><a title="myAES.AES.AES.shiftRowInv" href="#myAES.AES.AES.shiftRowInv">shiftRowInv</a></code></li>
+<li><code><a title="myAES.AES.AES.transposeMat" href="#myAES.AES.AES.transposeMat">transposeMat</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

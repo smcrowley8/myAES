@@ -27,7 +27,7 @@ repos:
           )$
         stages: [commit]
       - id: forbid-new-submodules
-      - id: no-commit-to-branch
+#      - id: no-commit-to-branch
       - id: trailing-whitespace
         args: [--markdown=linebreak-ext=md]
         stages: [commit]
