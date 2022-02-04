@@ -1,3 +1,4 @@
+"""Module for AES encrpytion/decryption"""
 # import codecs
 from rich.console import Console
 
@@ -977,15 +978,15 @@ class AES:
         """perform dot product on binary galois field objects"""
         # something wrong with logic above
         m = GF2(self.mod)
-        first = GF2(GF2(a[0]) * GF2(b[0])) % m
-        sec = GF2(GF2(a[1]) * GF2(b[1])) % m
-        third = GF2(GF2(a[2]) * GF2(b[2])) % m
-        fourth = GF2(GF2(a[3]) * GF2(b[3])) % m
+        first = GF2(a[0]) * GF2(b[0]) % m
+        sec = GF2(a[1]) * GF2(b[1]) % m
+        third = GF2(a[2]) * GF2(b[2]) % m
+        fourth = GF2(a[3]) * GF2(b[3]) % m
         temp = [first, sec, third, fourth]
-        answer = 0
+        answer = GF2(0)
         for i in temp:
             answer = answer ^ i
-        return answer
+        return answer.value
 
     def getCol(self, m: list, c: int) -> list:
         """get a column from the matrix as a list"""
