@@ -15,4 +15,4 @@ def test_GF2_polynomial():
     expectedPolyStr = "x "
     testGF = GF2(2)
     testPolynomialString = testGF.toPolynomial()
-    assert test_GF2_polynomial == expectedPolyStr, f"{expectedPolyStr=}, {testPolynomialString=}"
+    assert testPolynomialString == expectedPolyStr #, f"{expectedPolyStr=}, {testPolynomialString=}"
