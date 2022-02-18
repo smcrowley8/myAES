@@ -7,6 +7,14 @@ default_language_version:
 exclude: "tests/.*$"
 
 repos:
+  - repo: local
+    hooks:
+      - id: pdoc-filing
+        name: set pdoc
+        language: script
+        entry: .githooks/pre-commit-scripts/pdoc-gitpages.sh
+        description: create and structure documentation pages
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.0.1
     hooks:
