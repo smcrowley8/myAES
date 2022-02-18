@@ -17,7 +17,7 @@ if [[ "$CI" != 'true' ]]; then
 
     mkdir docs
 
-    python -m pdoc --force --html --config show_source_code=False --output-dir docs katan_ai
+    python -m pdoc --force --html --config show_source_code=False --output-dir docs myAES
 
     mv docs/katan_ai/* docs
 
