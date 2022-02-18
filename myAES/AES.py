@@ -728,7 +728,6 @@ class AES:
         t[0] = temp
         return t
 
-    # note
     # the keymat return here is created by rows, so key0=row 0, key1=row 1
     # creating the 40 extra keys will be done by added rows instead of columns
     def generateKeyMat(self, key: list) -> list:

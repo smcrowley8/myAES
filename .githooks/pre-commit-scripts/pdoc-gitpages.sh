@@ -19,9 +19,9 @@ if [[ "$CI" != 'true' ]]; then
 
     python -m pdoc --force --html --config show_source_code=False --output-dir docs myAES
 
-    mv docs/katan_ai/* docs
+    mv docs/myAES/* docs
 
-    rmdir docs/katan_ai
+    rmdir docs/myAES
 fi
 
 if [[ "$CI" != 'true' ]]; then
