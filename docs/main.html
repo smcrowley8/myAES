@@ -23,58 +23,6 @@
 </header>
 <section id="section-intro">
 <p>Main CLI entry point</p>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">&#34;&#34;&#34;Main CLI entry point&#34;&#34;&#34;
-import click
-from rich.console import Console  # , ConsoleThreadLocals
-
-from myAES.AES import AES
-
-console = Console()
-
-
-@click.group()
-def cli() -&gt; None:
-    &#34;&#34;&#34;Main entrypoint for CLI&#34;&#34;&#34;
-
-    console = Console()
-    console.log(&#34;Welcome to myAES&#34;)
-
-
-@cli.command()
-@click.option(
-    &#34;-file&#34;, type=click.types.STRING, default=&#34;&#34;, help=&#34;Path to file to be encrpyted&#34;
-)
-@click.option(
-    &#34;--debug&#34;,
-    type=click.types.BOOL,
-    default=False,
-    help=&#34;Whether or not to run AES and GF2 with debug logs on&#34;,
-)
-def encrypt(file: click.types.STRING, debug: bool) -&gt; None:
-    &#34;&#34;&#34;Will use aes to encrypt file at given path&#34;&#34;&#34;
-    aes = AES(printStuff=debug)
-    console.log(type(aes))
-
-
-@cli.command()
-@click.option(
-    &#34;--repeat&#34;,
-    type=click.types.STRING,
-    default=&#34;no input&#34;,
-    help=&#34;phrase/word to be echo&#39;d&#34;,
-)
-def test_command(repeat: click.types.STRING) -&gt; None:
-    console.log(repeat)
-
-
-if __name__ == &#34;__main__&#34;:
-    &#34;&#34;&#34;Run main cli&#34;&#34;&#34;
-    cli()</code></pre>
-</details>
 </section>
 <section>
 </section>
